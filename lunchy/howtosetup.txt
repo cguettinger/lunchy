@@ -1,0 +1,16 @@
+Das Folgende ist in diesem Projekt schon erfolgt:
+
+- Neues Projekt anlegen mit: meteor create projektname
+- Folgende Pakete hin zufügen mit: meteor add PAKET
+  jquery
+  bootstrap
+  accounts-ui
+  accounts-password
+- Folgende Pakete entfernen mit: meteor remove PAKET
+  autopublish
+  insecure
+- Folgende Pakete von Hand eintragen und von den entsprechenden Atmosphere Git Locations in das package Verzeichnis clonen 
+  (die Locations sind: https://github.com/TimHeckel/meteor-bootboxjs.git und https://github.com/srackham/toast.js.git):
+  bootboxjs
+  toastjs
+  
