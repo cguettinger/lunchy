@@ -1,0 +1,31 @@
+body {
+  padding-top: 60px;
+}
+.navbar {
+  width: 600px;
+}
+.container {
+  width: 580px !important;
+  margin-left: 20px;
+}
+.player .increment:hover,
+.player .remove:hover {
+  cursor: pointer;
+}
+a.login-link-text {
+  float: none;
+  padding: 0;
+  line-height: 19px;
+  color: #999999;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+a.login-link-text:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+}
+#login-buttons a {
+  cursor: pointer;
+  text-decoration: none;
+}

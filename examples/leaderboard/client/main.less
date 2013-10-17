@@ -1,0 +1,48 @@
+body {
+  padding-top: 60px;  // Offset the container below the topbar.
+}
+
+.navbar {
+  width: 600px;
+}
+
+.container {
+  width: 580px !important;
+  margin-left: 20px;
+}
+
+.player {
+  .increment, .remove {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+
+//
+// Customized Meteor 'Sign in' CSS link so it matches boostrap navbar styling.
+//
+
+// Same as bootstrap.css: .navbar .nav > li
+a.login-link-text {
+  float: none;
+  padding: 0;
+  line-height: 19px;
+  color: #999999;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+// Same as bootstrap.css: .navbar .nav > li:hover
+a.login-link-text:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+// Modified accounts-ui/login_buttons.less.css: #login-buttons a
+#login-buttons a {
+  cursor: pointer;
+  text-decoration: none;
+}

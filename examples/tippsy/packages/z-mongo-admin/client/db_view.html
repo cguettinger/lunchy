@@ -1,0 +1,27 @@
+<template name='db_view'>
+  <div class='z-mongo-admin'>
+    {{#if loggingIn}}
+      {{> spinner}}
+    {{else}}
+      {{> admin_navbar}}
+      <div class="container content">
+        <ul class="breadcrumb">
+          <li class="active">Home</li>
+        </ul>
+        <table class='table table-bordered table-striped'>
+          <thead>
+            <tr>
+              <th>Collection Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each collections}}
+            <tr><td><a href='/admin/{{ name }}'>{{name}}</a></td></tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{> admin_new_collection}}
+      </div>
+    {{/if}}
+  </div>
+</template>

@@ -1,0 +1,42 @@
+<template name="admin_login">
+  <div class='z-mongo-admin'>
+    {{#if loggingIn}}
+      {{> spinner}}
+    {{else}}
+      {{> admin_navbar}}
+      <div class="container content">
+        {{#if notLoggedIn}}
+          <h1>
+            {{#if adminAccountNotExist}}
+              Make an admin account
+            {{else}}
+              Log In
+            {{/if}}
+          </h1>
+          <form id="sign-in-form">
+            <div class='control-group'>
+              <label class='control-label' for='email'>Email</label>
+              <div class='controls'>
+                <input name="email" id='email' type="text">
+              </div>
+            </div>
+            <div class='control-group'>
+              <label class='control-label' for='password'>Password</label>
+              <div class='controls'>
+                <input name="password" id='password' type="password">
+              </div>
+            </div>
+            <div>
+              <input class="btn" type="submit" value="Sign {{#if adminAccountNotExist}}up{{else}}in{{/if}}">
+            </div>
+          </form>
+        {{else}}
+          <h1>Log out</h1>
+          <div>
+            <a class="logout btn" href="#">Log out</a>
+          </div>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+</template>

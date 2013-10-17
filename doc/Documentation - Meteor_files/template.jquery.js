@@ -1,0 +1,3 @@
+(function(){Template.__define__("pkg_jquery",Package.handlebars.Handlebars.json_ast_to_func([["#",[[0,"better_markdown"]],["\n\n## `jquery`\n\n[jQuery](http://jquery.com/) is a fast and concise JavaScript\nLibrary that simplifies HTML document traversing, event handling,\nanimating, and Ajax interactions for rapid web development.\n\nThe `jquery` package adds the jQuery library to the client JavaScript\nbundle. It has no effect on the server.\n\nIn addition to the `jquery` package, Meteor provides several jQuery\nplugins as separate packages. These include:\n\n* [`jquery-history`](https://github.com/balupton/history.js)\n* [`jquery-layout`](http://layout.jquery-dev.net/)\n* [`jquery-waypoints`](http://imakewebthings.com/jquery-waypoints/)\n\n"]]]));
+
+})();

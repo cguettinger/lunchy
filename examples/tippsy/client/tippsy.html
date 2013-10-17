@@ -1,0 +1,129 @@
+<head>
+    <title>tippsy</title>
+</head>
+
+<body>
+
+<div id="wrap">
+    <div id="main" class="container">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                {{> navbar}}
+            </div>
+        </div>
+        <div>
+            {{> content}}
+        </div>
+    </div>
+    <div id="push"></div>
+</div>
+<div id="footer">
+    <div class="container">
+        <p class="text-muted credit">
+
+        <h2 class="text-center">Tipp sie mit Tippsy!</h2></p>
+    </div>
+</div>
+
+</body>
+
+<template name="navbar">
+    <span class="brand">TIPPSY</span>
+    <ul class="nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li class="reset_data"><a href="#">Reset Data</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav pull-right">
+        <li><a href="#">{{loginButtons}}</a></li>
+    </ul>
+</template>
+
+<template name="content">
+    <div class="row-fluid">
+        <div class="span3">
+            {{#if loggedIn}}
+                <h3>Benutzerliste</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th><i class="icon-user"></i>Username</th>
+                        <th>Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each tippsyUsers}}
+                    <tr>
+                        <td> {{name}}</td>
+                        <td>{{score}}</td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            {{/if}}
+            {{#if notLoggedIn}}
+                <h3>Benutzerliste</h3>
+                <span>Sie sind noch nicht angemeldet!</span>
+            {{/if}}
+
+        </div>
+        <div class="span5">
+            <h3>Spieletabelle</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Team A</th>
+                    <th>Team B</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each matches}}
+                <tr>
+                    <td>{{teamA}}</td>
+                    <td>{{teamB}}</td>
+                    <td><span class="badge">{{scoreTeamA}}</span></td>
+                    <td><span class="badge">{{scoreTeamB}}</span></td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="span4">
+            {{#if loggedIn}}
+                <h3>Ihre Tipps</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Match-ID</th>
+                        <th>Tore Team A</th>
+                        <th>Tore Team B</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each theTipps}}
+                    {{> myTipp}}
+                    {{/each}}
+                    </tbody>
+                </table>
+            {{/if}}
+            {{#if notLoggedIn}}
+                <h3>Ihre Tipps</h3>
+                <span>Sie sind noch nicht angemeldet!</span>
+            {{/if}}
+
+        </div>
+    </div>
+</template>
+
+<template name="myTipp">
+    <tr>
+        <td>{{match.teamA}} : {{match.teamB}}</td>
+        <td><input id="score-team-a" type="text" class="score-input" value="{{scoreTeamA}}"/></td>
+        <td><input id="score-team-b" type="text" class="score-input" value="{{scoreTeamB}}"/></td>
+    </tr>
+</template>

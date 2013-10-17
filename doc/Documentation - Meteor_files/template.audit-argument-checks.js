@@ -1,0 +1,3 @@
+(function(){Template.__define__("pkg_audit_argument_checks",Package.handlebars.Handlebars.json_ast_to_func([["#",[[0,"better_markdown"]],["\n\n## `audit-argument-checks`\n\nThis package causes Meteor to require that all arguments passed to methods and\npublish functions are [`check`ed](#check). Any method that does not pass each\none of its arguments to `check` will throw an error, which will be logged on the\nserver and which will appear to the client as a\n`500 Internal server error`. This is a simple way to help ensure that your\napp has complete check coverage.\n\nMethods and publish functions that do not need to validate their arguments can\nsimply run `check(arguments, [Match.Any])` to satisfy the\n`audit-argument-checks` coverage checker.\n\n"]]]));
+
+})();

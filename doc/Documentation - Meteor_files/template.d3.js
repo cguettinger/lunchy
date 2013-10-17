@@ -1,0 +1,3 @@
+(function(){Template.__define__("pkg_d3",Package.handlebars.Handlebars.json_ast_to_func([["#",[[0,"better_markdown"]],["\n\n## `d3`\n\n[D3.js](http://d3js.org/) is a JavaScript library for manipulating\ndocuments based on data. D3 helps you bring data to life using HTML, SVG\nand CSS. D3's emphasis on web standards gives you the full capabilities\nof modern browsers without tying yourself to a proprietary framework,\ncombining powerful visualization components and a data-driven approach\nto DOM manipulation.\n\nThe `d3` package adds the D3 library to the client JavaScript\nbundle. It has no effect on the server.\n\n"]]]));
+
+})();

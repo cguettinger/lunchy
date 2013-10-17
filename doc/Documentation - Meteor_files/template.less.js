@@ -1,0 +1,3 @@
+(function(){Template.__define__("pkg_less",Package.handlebars.Handlebars.json_ast_to_func([["#",[[0,"better_markdown"]],["\n## `less`\n\n[LESS](http://lesscss.org/) extends CSS with dynamic behavior such as variables, mixins,\noperations and functions. It allows for more compact stylesheets and\nhelps reduce code duplication in CSS files.\n\nWith the `less` package installed, `.less` files in your application are\nautomatically compiled to CSS and the results are included in the client CSS\nbundle.\n\n",["#",[[0,"note"]],["\nIf you want to `@import` a file, give it the extension `.lessimport`\nto prevent Meteor from processing it independently.\n"]],"\n\n"]]]));
+
+})();
