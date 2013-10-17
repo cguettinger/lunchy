@@ -7,19 +7,19 @@ Meteor.startup(function () {
         };
         Accounts.createUser(options);
         Accounts.createUser({
-            username: 'cgr@sybit.de',
-            password: 'cgr@sybit.de',
-            email: 'cgr@sybit.de'
+            username: 'test1@sybit.de',
+            password: 'test1@sybit.de',
+            email: 'test1@sybit.de'
         });
         Accounts.createUser({
-            username: 'twm@sybit.de',
-            password: 'twm@sybit.de',
-            email: 'twm@sybit.de'
+            username: 'test2@sybit.de',
+            password: 'test2@sybit.de',
+            email: 'test2@sybit.de'
         });
         Accounts.createUser({
-            username: 'cba@sybit.de',
-            password: 'cba@sybit.de',
-            email: 'cba@sybit.de'
+            username: 'test3@sybit.de',
+            password: 'test3@sybit.de',
+            email: 'test3@sybit.de'
         });
     }
     if (Matches.find().count() === 0) {
@@ -38,15 +38,15 @@ Meteor.startup(function () {
     }
     if (TippsyUsers.find().count() === 0) {
         var tippsyUser1ID = TippsyUsers.insert({
-            name: "cgr@sybit.de",
+            name: "test1@sybit.de",
             score: 5
         });
         var tippsyUser2D = TippsyUsers.insert({
-            name: "twm@sybit.de",
+            name: "test2@sybit.de",
             score: 0
         });
         var tippsyUser3ID = TippsyUsers.insert({
-            name: "cba@sybit.de",
+            name: "test3@sybit.de",
             score: 25
         });
     }
