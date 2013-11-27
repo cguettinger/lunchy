@@ -1,0 +1,6 @@
+Tasks:
+- Template Entwicklung
+- Server Code: Email, Objektmodell
+- Server Actions: Voten, Gruppe beitreten/austreten
+- Datenoperationen: Gruppe gründen, neue Nachricht
+- Anmeldung/Login und Read-only Variante
