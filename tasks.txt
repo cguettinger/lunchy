@@ -1,6 +1,33 @@
 Tasks:
+
+- wir starten eventuell mit dem autopublish Paket (am Ende können wir uns noch Gedanken über Subscriptions machen)
+- wann auch immer wir partielle Collections publizieren sollen diese anders heißen als die Grundmenge
+  (Beispiel somePosts statt posts)
+- Projektstruktur aufsetzen:
+    /client, /server, /public, /lib, and /collections
+
+    Code in the /server directory only runs on the server.
+    Code in the /client directory only runs on the client.
+    Everything else runs on both the client and server.
+    Files in /lib are loaded before anything else.
+    Any main.* file is loaded after everything else.
+    Your static assets (fonts, images, etc.) go in the /public directory.
+
 - Template Entwicklung
+    - main.html mit der Bootstrap Struktur der Anwendung aufsetzen mit statischem Inhalt
+    Umsetzung des Mockups
+    - dann in geeignete Templates schneiden (html views und entsprechende JS Dateien)
+    - statische JS Datenobjekte
+    wichtige Infos zu Handlebars: http://javascriptissexy.com/handlebars-js-tutorial-learn-everything-about-handlebars-js-javascript-templating/
+    To keep things simple, we'll adopt the convention of naming the manager after the template, except with a .js extension.
+
+- Email und periodische Jobs
+    rausfinden wie man zu gewissen Zeipunkten prüft ob man eine Mail verschicken muss
+    periodische Jobs
+    Mailversand
 - Server Code: Email, Objektmodell
 - Server Actions: Voten, Gruppe beitreten/austreten
 - Datenoperationen: Gruppe gründen, neue Nachricht
 - Anmeldung/Login und Read-only Variante
+
+- Backup stories: Router package aufsetzen und verschiedene pages routen
