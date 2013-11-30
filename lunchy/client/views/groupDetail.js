@@ -27,5 +27,11 @@ var proposalData =
     ];
 
 Template.groupDetail.helpers({
-    proposals: proposalData
+    //TODO: delete static proposals and use groupObject
+    proposals: proposalData,
+    groupObject: function(){
+        var groupId = Session.get('selectedGroup');
+        return Groups.findOne(groupId);
+
+    }
 });
