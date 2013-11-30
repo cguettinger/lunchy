@@ -20,7 +20,7 @@ if (Groups.find().count() === 0) {
         name: "3-oben"
     });
 
-    UsersToGroups.insert({userId: C7stGWMv3ovwzJ6nS, groups: [groupEcom, group3oben]});
+
 }
 
 Groups.allow({
@@ -40,5 +40,11 @@ Meteor.publish("groups", function () {
 });
 
 Meteor.publish("usersToGroups", function () {
-    return UsersToGroups.find({userId: Meteor.userId()});
+    return UsersToGroups.find({userId: this.userId});
+});
+
+Meteor.methods({
+    printInfos: function() {
+        console.log("usersToGroups: " + UsersToGroups.find().count());
+    }
 });
