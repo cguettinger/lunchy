@@ -1,0 +1,3 @@
+meteor methods for remote server calls and collection definitions go in here
+
+Code inside folders that are not client/ or server/ will run in both contexts.

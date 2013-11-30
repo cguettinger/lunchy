@@ -1,0 +1,3 @@
+Code in the /client directory only runs on the client.
+
+Any JS / CSS code in any file or folder is found by meteor.
