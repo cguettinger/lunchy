@@ -11,30 +11,31 @@ Meteor.subscribe('groups');
 
 Meteor.subscribe('usersToGroups');
 
-Template.groupList.helpers({
-    myGroups: myGroups,
-    allGroups: function () {
-        allGroupsWithoutMyGroups = [];
-        allGroups = Groups.find().fetch();
-        _.forEach(allGroups, function(group, i, allGroups){
-            insert = true;
-            myGroups.forEach(function(myGroup) {
-                if(myGroup.name == group.name){
-                    insert = false;
+Deps.autorun(function(){
+    Template.groupList.helpers({
+        myGroups: function(){
+            myGroupsArray = [];
+            userToGroupsArray = UsersToGroups.find().fetch();
+            _.forEach(userToGroupsArray, function(userToGroupElement, i, userToGroupsArray){
+                myGroupsArray.push(Groups.findOne(userToGroupElement.group));
+            });
+
+            return myGroupsArray;
+        },
+        allGroups: function () {
+            allGroupsWithoutMyGroups = [];
+            allGroups = Groups.find().fetch();
+            console.log("All Groups: " + allGroups.length);
+            _.forEach(allGroups, function(theGroup, i, allGroups){
+                if(UsersToGroups.find({group: theGroup._id}).count() == 0){
+                    allGroupsWithoutMyGroups.push(theGroup);
                 }
             });
-            /*_.forEach(myGroups, function(mygroup, i, myGroups){
-                if(mygroup.name == group.name){
-                    insert = false;
-                }
-            });*/
-            if(insert){
-                //allGroupsWithoutMyGroups.add(group);
-            }
-        });
-        return Groups.find();
-    }
-});
+            console.log("not my Groups array: " + allGroupsWithoutMyGroups.length);
+            return allGroupsWithoutMyGroups;
+        }
+    })}
+);
 
 Template.groupList.events({
     'submit #create_group': function (evt) {
@@ -48,7 +49,6 @@ Template.groupList.events({
 
     'click .groupItem': function (evt) {
        evt.preventDefault();
-       Toast.info($(evt.target).attr("href"));
        Session.set('selectedGroup', $(evt.target).attr("href"));
        UsersToGroups.insert({userId: Meteor.userId(), group: $(evt.target).attr("href")});
        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
