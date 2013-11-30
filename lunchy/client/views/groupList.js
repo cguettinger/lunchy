@@ -48,7 +48,6 @@ Template.groupList.events({
 
     'click .groupItem': function (evt) {
        evt.preventDefault();
-       Toast.info($(evt.target).attr("href"));
        Session.set('selectedGroup', $(evt.target).attr("href"));
        UsersToGroups.insert({userId: Meteor.userId(), group: $(evt.target).attr("href")});
        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());

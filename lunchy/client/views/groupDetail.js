@@ -30,7 +30,8 @@ var proposalData =
 
 Template.groupDetail.helpers({
     proposals: function(){
-        return Proposals.find()
+        var selectedGroupId = Session.get('selectedGroup');
+        return Proposals.find({'groupId' : selectedGroupId});
     },
     groupObject: function(){
         var groupId = Session.get('selectedGroup');
@@ -54,7 +55,6 @@ Template.groupDetail.events(
                 groupId: Session.get('selectedGroup')
             };
 
-            Toast.info(insert.creator);
             Proposals.insert(insert);
         }
     }
