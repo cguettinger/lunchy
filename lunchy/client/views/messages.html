@@ -1,0 +1,14 @@
+
+<template name="messages">
+    <div class="input-append">
+        <input id="player_name" type="text" placeholder="Neue Nachricht"/>
+        <button id="add_button" class="btn" type="button">Hinzufügen</button>
+    </div>
+    <div id="lunchy-message" class="row-fluid">
+        <ul class="">
+            {{#each messages}}
+            <li><span class="badge">{{author}}</span>&nbsp;&nbsp;<span class="">{{message}}</span>&nbsp;</li>
+            {{/each}}
+        </ul>
+    </div>
+</template>
