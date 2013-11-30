@@ -1,0 +1,10 @@
+body{
+    background-image: url("/images/background.jpg");
+    background-size:cover;
+}
+
+body > .container-fluid
+{
+    max-width: 1200px;
+    margin: 0 auto;
+}

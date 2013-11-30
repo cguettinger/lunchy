@@ -30,10 +30,11 @@
         {{> lunchyContentArea}}       
         
         <div class="row-fluid">
-            <footer class="span12" id="lunchy-footer">
-                <hr/>
-                footer
-            </footer>
+            <div class="span12 navbar navbar-fixed-bottom" id="lunchy-footer">
+                <div class="navbar-inner">
+                    Footer
+                </div>
+            </div>
 
         </div>
     </div>
@@ -44,7 +45,7 @@
     {{#if isLoggedIn}}
     <div class="row-fluid">
         <div class="span12" id="lunchy-datepicker">
-            <hr/>
+
             <ul class="pager">
                 <li class="previous">
                     <a href="#">&larr; Older</a>
@@ -53,7 +54,6 @@
                     <a href="#">Newer &rarr;</a>
                 </li>
             </ul>
-            <hr/>
         </div>
     </div>
 
