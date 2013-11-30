@@ -2,22 +2,25 @@
  * Created by ast on 30.11.13.
  */
 
+
 if (Groups.find().count() === 0) {
-    Groups.insert({
+    var groupBr = Groups.insert({
         name: "BR"
     });
 
-    Groups.insert({
+    var groupMedia = Groups.insert({
         name: "Media"
     });
 
-    Groups.insert({
+    var groupEcom = Groups.insert({
         name: "E-Commerce"
     });
 
-    Groups.insert({
+    var group3oben = Groups.insert({
         name: "3-oben"
     });
+
+
 }
 checkInsertAllowed = function(userId, doc){ return !! userId; }
 
@@ -37,6 +40,22 @@ Proposals.allow({
     insert: checkInsertAllowed
 });
 
+UsersToGroups.allow({
+    insert: function(userId, doc){
+        return !! userId;
+    }
+});
+
+Meteor.publish("usersToGroups", function () {
+    return UsersToGroups.find({userId: this.userId});
+});
+
+Meteor.methods({
+    printInfos: function() {
+        console.log("usersToGroups: " + UsersToGroups.find().count());
+    }
+});
+
 Admitters.allow({
     insert: checkInsertAllowed
 });
@@ -45,12 +64,10 @@ Messages.allow({
     insert: checkInsertAllowed
 });
 
-Meteor.publish("groups", function () {
-    return Groups.find();
-});
 Meteor.publish("proposals", function () {
     return Proposals.find();
 });
 Meteor.publish("admitters", function () {
     return Admitters.find();
 });
+
