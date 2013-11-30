@@ -9,6 +9,8 @@ var myGroups = [
 
 Meteor.subscribe('groups');
 
+Meteor.subscribe('usersToGroups');
+
 Template.groupList.helpers({
     myGroups: myGroups,
     allGroups: function () {
@@ -21,5 +23,6 @@ Template.groupList.events({
         evt.preventDefault();
         Groups.insert({name: $(evt.target).find("input").val()});
         $(evt.target).find("input").val("");
+        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
     }
 });
