@@ -19,13 +19,26 @@ if (Groups.find().count() === 0) {
         name: "3-oben"
     });
 }
+checkInsertAllowed = function(userId, doc){ return !! userId; }
 
 Groups.allow({
-    insert: function(userId, doc){
-        return !! userId;
-    }
+    insert: checkInsertAllowed
+});
+
+Proposals.allow({
+    insert: checkInsertAllowed
+});
+
+Admitters.allow({
+    insert: checkInsertAllowed
 });
 
 Meteor.publish("groups", function () {
     return Groups.find();
+});
+Meteor.publish("proposals", function () {
+    return Proposals.find();
+});
+Meteor.publish("admitters", function () {
+    return Admitters.find();
 });
