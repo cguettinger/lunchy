@@ -1,3 +1,5 @@
+Meteor.subscribe('proposals');
+
 var proposalData =
     [
         {
@@ -34,4 +36,23 @@ Template.groupDetail.helpers({
         return Groups.findOne(groupId);
 
     }
+
 });
+
+Template.groupDetail.events(
+    {
+        'click #create_proposal': function (evt) {
+            evt.preventDefault();
+            Toast.info("bla")
+            Proposals.insert(
+                {
+                    description: $(evt.target).find("proposalDescription").val(),
+                    time: $(evt.target).find("proposalTime").val(),
+                    creator: Meteor.userId(),
+                    groupId: Session.get('selectedGroup')
+
+                }
+            );
+        }
+    }
+)

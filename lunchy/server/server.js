@@ -22,6 +22,7 @@ if (Groups.find().count() === 0) {
 
 
 }
+checkInsertAllowed = function(userId, doc){ return !! userId; }
 
 if (Messages.find().count() === 0) {
     Messages.insert({
@@ -47,15 +48,11 @@ Meteor.publish("groups", function () {
 });
 
 Groups.allow({
-    insert: function(userId, doc){
-        return !! userId;
-    }
+    insert: checkInsertAllowed
 });
 
-Messages.allow({
-    insert: function(userId, doc){
-        return !! userId;
-    }
+Proposals.allow({
+    insert: checkInsertAllowed
 });
 
 UsersToGroups.allow({
@@ -72,5 +69,20 @@ Meteor.methods({
     printInfos: function() {
         console.log("usersToGroups: " + UsersToGroups.find().count());
     }
+});
+
+Admitters.allow({
+    insert: checkInsertAllowed
+});
+
+Messages.allow({
+    insert: checkInsertAllowed
+});
+
+Meteor.publish("proposals", function () {
+    return Proposals.find();
+});
+Meteor.publish("admitters", function () {
+    return Admitters.find();
 });
 
