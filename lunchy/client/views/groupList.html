@@ -21,13 +21,15 @@
             {{#each allGroups}}
                 <li>
                     <i class="icon-plus-sign"></i>
-                    {{name}}
+                    <a href="{{_id}}" class="groupItem">{{name}}</a>
                 </li>
             {{/each}}
         </ul>
 
-        <div class="create_group">
-            <input type="text" id="create_group" placeholder="Neue Gruppe" />
+        <div>
+            <form id="create_group">
+                <input type="text" placeholder="Neue Gruppe" />
+            </form>
         </div>
     </div>
 

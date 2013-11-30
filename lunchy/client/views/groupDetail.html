@@ -1,4 +1,9 @@
-<template name="groupDetails">
+<template name="groupDetail">
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>{{groupObject.name}}</h3>
+        </div>
+    </div>
     <div class="row-fluid">
         <div class="span4">
             <input type="text" placeholder="neuer Vorschlag">
@@ -15,46 +20,21 @@
             <h4>Vorschläge</h4>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="span6">
-            <button class="btn btn-info" type="button"><span class="badge">cgr</span>&nbsp;Chinese um 12:00 Uhr von...</button>
-        </div>
-        <div class="span6">
-            <div class="row-fluid">
-                <div class="span12">
-                    <span class="badge badge-info">3</span>
-                    <span class="badge">jre</span>
-                    <span class="badge">nnl</span>
-                    <span class="badge">cgr</span>
+    {{#each proposals}}
+        <div class="row-fluid">
+            <div class="span6">
+                <button class="btn btn-info" type="button"><span class="badge">{{creator}}</span>&nbsp;{{title}}</button>
+            </div>
+            <div class="span6">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <span class="badge badge-info">{{admiters.length}}</span>
+                        {{#each admiters}}
+                            <span class="badge">{{name}}</span>
+                        {{/each}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span6">
-            <button class="btn btn-info" type="button"><span class="badge">cgr</span>&nbsp;Büffee um 12:00 Uhr von...</button>
-        </div>
-        <div class="span6">
-            <div class="row-fluid">
-                <div class="span12">
-                    <span class="badge badge-info">2</span>
-                    <span class="badge">pwn</span>
-                    <span class="badge">mma</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span6">
-            <button class="btn btn-info" type="button"><span class="badge">cgr</span>&nbsp;Italiener um 12:00 Uhr von...</button>
-        </div>
-        <div class="span6">
-            <div class="row-fluid">
-                <div class="span12">
-                    <span class="badge badge-info">1</span>
-                    <span class="badge">fhr</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{/each}}
 </template>
