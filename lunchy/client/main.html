@@ -8,7 +8,7 @@
     <div class="container-fluid">
 
         <div class="row-fluid">
-            <div class="navbar navbar-inverse">
+            <div class="navbar ">
                 <div class="navbar-inner">
                     <div class="container-fluid">
                         <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -18,13 +18,8 @@
                         </button>
                         <a class="brand" href="#">Lunchy</a>
                         <div class="nav-collapse collapse">
-                            <p class="navbar-text pull-right">
-                                Logged in as <a href="#" class="navbar-link">Username</a>
-                            </p>
-                            <ul class="nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#about">About</a></li>
-                                <li><a href="#contact">Contact</a></li>
+                            <ul class="nav pull-left">
+                                <li><a href="#">{{loginButtons}}</a></li>
                             </ul>
                         </div><!--/.nav-collapse -->
                     </div>
@@ -32,47 +27,7 @@
             </div>
         </div>
 
-        <div class="row-fluid">
-            <div class="span12" id="lunchy-datepicker">
-                <hr/>
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
-                <hr/>
-            </div>
-        </div>
-
-        <div id="lunchny-container" class="row-fluid">
-            <div class="span3" id="lunchy-sidebar">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Meine Gruppen</li>
-                        <li class="active"><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li class="nav-header">Alle Gruppen</li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="span9" id="lunchy-content">
-                <div class="hero-unit">
-                    {{> messages}}
-                </div>
-
-            </div>
-        </div>
+        {{> lunchyContentArea}}
 
         <div class="row-fluid">
             <footer class="span12" id="lunchy-footer">
@@ -84,3 +39,44 @@
     </div>
 
 </body>
+
+<template name="lunchyContentArea">
+    {{#if isLoggedIn}}
+    <div class="row-fluid">
+        <div class="span12" id="lunchy-datepicker">
+            <hr/>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="#">&larr; Older</a>
+                </li>
+                <li class="next">
+                    <a href="#">Newer &rarr;</a>
+                </li>
+            </ul>
+            <hr/>
+        </div>
+    </div>
+
+    <div id="lunchny-container" class="row-fluid">
+        <div class="span3" id="lunchy-sidebar">
+            <div class="well sidebar-nav">
+                {{> groupList}}
+            </div>
+        </div>
+        <div class="span9" id="lunchy-content">
+            <div class="hero-unit">
+                <p>
+                    {{> messages}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+    {{else}}
+    <div class="row-fluid">
+        <div class="span12 hero-unit">
+            PLEAZE LOG IN
+        </div>
+    </div>
+    {{/if}}
+</template>

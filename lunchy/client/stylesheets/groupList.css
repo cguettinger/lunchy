@@ -1,3 +1,8 @@
-li{
+.sidebar-nav li{
     list-style: none;
+}
+
+.sidebar-nav #create_group{
+    width: 75%;
+    max-width: 200px;
 }
