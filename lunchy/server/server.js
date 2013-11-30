@@ -21,21 +21,6 @@ if (Groups.find().count() === 0) {
 }
 checkInsertAllowed = function(userId, doc){ return !! userId; }
 
-if (Messages.find().count() === 0) {
-    Messages.insert({
-        message: 'heute Büffee',
-        author: 'cgr'
-    });
-    Messages.insert({
-        message: 'nein',
-        author: 'nll'
-    });
-    Messages.insert({
-        message: 'doch',
-        author: 'cba'
-    });
-}
-
 Meteor.publish("messages", function () {
     return Messages.find();
 });

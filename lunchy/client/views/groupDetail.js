@@ -28,16 +28,6 @@ var proposalData =
         }
     ];
 
-Template.groupDetail.helpers({
-    //TODO: delete static proposals and use groupObject
-    proposals: proposalData,
-    groupObject: function(){
-        var groupId = Session.get('selectedGroup');
-        return Groups.findOne(groupId);
-
-    }
-
-});
 
 Template.groupDetail.events(
     {
@@ -56,3 +46,13 @@ Template.groupDetail.events(
         }
     }
 )
+
+Template.groupDetail.helpers({
+    //TODO: delete static proposals and use groupObject
+    proposals: proposalData,
+    groupObject: function(){
+        var groupId = Session.get('selectedGroup');
+        return Groups.findOne(groupId);
+
+    }
+});
