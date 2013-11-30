@@ -28,31 +28,34 @@ var proposalData =
         }
     ];
 
+Template.groupDetail.helpers({
+    proposals: function(){
+        return Proposals.find()
+    },
+    groupObject: function(){
+        var groupId = Session.get('selectedGroup');
+        return Groups.findOne(groupId);
+
+    },
+    userNameByUserId: function(creatorUserId)
+    {
+        return Meteor.users.findOne(creatorUserId).emails[0].address.split("@")[0];
+    }
+});
 
 Template.groupDetail.events(
     {
         'click #create_proposal': function (evt) {
             evt.preventDefault();
-            Toast.info("bla")
-            Proposals.insert(
-                {
-                    description: $(evt.target).find("proposalDescription").val(),
-                    time: $(evt.target).find("proposalTime").val(),
-                    creator: Meteor.userId(),
-                    groupId: Session.get('selectedGroup')
+            var insert = {
+                description: $("#proposalDescription").val(),
+                time: $("#proposalTime").val(),
+                creator: Meteor.userId(),
+                groupId: Session.get('selectedGroup')
+            };
 
-                }
-            );
+            Toast.info(insert.creator);
+            Proposals.insert(insert);
         }
     }
-)
-
-Template.groupDetail.helpers({
-    //TODO: delete static proposals and use groupObject
-    proposals: proposalData,
-    groupObject: function(){
-        var groupId = Session.get('selectedGroup');
-        return Groups.findOne(groupId);
-
-    }
-});
+);
