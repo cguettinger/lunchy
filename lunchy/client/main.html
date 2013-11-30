@@ -8,7 +8,7 @@
     <div class="container-fluid">
 
         <div class="row-fluid">
-            <div class="navbar ">
+            <div class="navbar navbar-inverse">
                 <div class="navbar-inner">
                     <div class="container-fluid">
                         <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -26,9 +26,9 @@
                 </div>
             </div>
         </div>
-
-        {{> lunchyContentArea}}
-
+        
+        {{> lunchyContentArea}}       
+        
         <div class="row-fluid">
             <footer class="span12" id="lunchy-footer">
                 <hr/>
@@ -65,9 +65,10 @@
         </div>
         <div class="span9" id="lunchy-content">
             <div class="hero-unit">
-                <p>
+                    {{> groupDetails}}
+            </div>
+            <div class="hero-unit">
                     {{> messages}}
-                </p>
             </div>
 
         </div>
