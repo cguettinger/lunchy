@@ -1,45 +1,33 @@
 
-<!--<head>
-    <title>Lunchy Test</title>
-</head>
-
-<body>
-<div id="top-tag-filter">
-    {{> groupList}}
-</div>
-
-</body>-->
-
 <template name="groupList">
     <div class="my_groups">
         <h5>Meine Gruppen: </h5>
+
         <ul>
-            <li>
-                <i class="icon-minus-sign"></i>
-                Media
-            </li>
-            <li>
-                <i class="icon-minus-sign"></i>
-                E-Commerce
-            </li>
+            {{#each myGroups}}
+                <li>
+                    <i class="icon-minus-sign"></i>
+                    {{name}}
+                </li>
+            {{/each}}
         </ul>
+
     </div>
 
     <div class="all_groups">
         <h5>Alle Gruppen: </h5>
+
         <ul>
-            <li>
-                <i class="icon-plus-sign"></i>
-                BR
-            </li>
-            <li>
-                <i class="icon-plus-sign"></i>
-                3-Oben
-            </li>
+            {{#each allGroups}}
+                <li>
+                    <i class="icon-plus-sign"></i>
+                    {{name}}
+                </li>
+            {{/each}}
         </ul>
 
-        <div class="createList">
-            <input type="text" id="new-list" placeholder="Neue Gruppe" />
+        <div class="create_group">
+            <input type="text" id="create_group" placeholder="Neue Gruppe" />
         </div>
     </div>
 
