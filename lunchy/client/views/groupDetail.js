@@ -40,7 +40,7 @@ Template.groupDetail.helpers({
     },
     userNameByUserId: function(creatorUserId)
     {
-        return Meteor.users.findOne(creatorUserId).emails[0].address.split("@")[0];
+        return Meteor.call('userNameByUserId', creatorUserId);
     }
 });
 

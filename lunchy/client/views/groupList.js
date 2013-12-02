@@ -47,11 +47,28 @@ Template.groupList.events({
 
     },
 
+    'click .groupIconPlus': function (evt) {
+        evt.preventDefault();
+        console.log("plus: " + $(evt.target));
+        if(UsersToGroups.find({userId: Meteor.userId(), group: $(evt.currentTarget).attr("href")}).count() == 0){
+            UsersToGroups.insert({userId: Meteor.userId(), group: $(evt.currentTarget).attr("href")});
+        }
+        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
+        Meteor.call('ntntInfos');
+    },
+
+    'click .groupIconMinus': function (evt) {
+        evt.preventDefault();
+        var aUsersToGroups = UsersToGroups.find({userId: Meteor.userId(), group: $(evt.currentTarget).attr("href")}).fetch();
+
+        console.log("minus: " + aUsersToGroups);
+        UsersToGroups.remove(aUsersToGroups._id);
+        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
+        Meteor.call('printInfos');
+    },
+
     'click .groupItem': function (evt) {
        evt.preventDefault();
        Session.set('selectedGroup', $(evt.target).attr("href"));
-       UsersToGroups.insert({userId: Meteor.userId(), group: $(evt.target).attr("href")});
-       console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
-       Meteor.call('printInfos');
     }
 });
