@@ -4,14 +4,7 @@
 # but you can also edit it by hand.
 
 standard-app-packages
+autopublish
+insecure
 preserve-inputs
-jquery
-bootstrap
-accounts-password
-bootboxjs
-toastjs
 iron-router
-houston
-paginated-subscription
-spin
-accounts-ui-bootstrap-dropdown

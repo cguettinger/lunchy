@@ -1,0 +1,42 @@
+<template name="_houston_login">
+  <div class="houston">
+    {{#if loggingIn}}
+      {{> spinner}}
+    {{else}}
+      {{> _houston_navbar}}
+      <div class="container content">
+        {{#if logged_in }}
+          <h1>Currently logged in</h1>
+          <div>
+            {{#unless admin_user_exists}}
+              <a class="become-houston-admin btn" href="#">Claim Admin</a>
+            {{/unless}}
+            <a class="houston-logout btn" href="#">Log out</a>
+          </div>
+          {{else}}
+            {{! nobody is logged in - sign in or sign up}}
+            <h1>
+              {{#if admin_user_exists}} Log In {{else}} Create an admin account {{/if}}
+            </h1>
+            <form id="houston-sign-in-form">
+              <div class='control-group'>
+                <label class='control-label' for='houston-email'>Email</label>
+                <div class='controls'>
+                  <input name="houston-email" id='houston-email' type="text">
+                </div>
+              </div>
+              <div class='control-group'>
+                <label class='control-label' for='password'>Password</label>
+                <div class='controls'>
+                  <input name="houston-password" id='houston-password' type="password">
+                </div>
+              </div>
+              <div>
+                <input class="btn" type="submit" value="Sign {{#if admin_user_exists}}in{{else}}up{{/if}}">
+              </div>
+            </form>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+</template>

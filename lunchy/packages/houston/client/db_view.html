@@ -1,0 +1,33 @@
+<template name='_houston_db_view'>
+  <div class="houston">
+    {{#if loggingIn}}
+      {{> spinner}}
+    {{else}}
+      {{> _houston_navbar}}
+      <div class="container content">
+        <ul class="breadcrumb">
+          <li class="active">Home</li>
+        </ul>
+        {{# unless collections }}
+          <p class="lead">If this is your first time using Houston, you may need to <a id="refresh" class="btn btn-large btn-warning">Refresh this page</a></p>
+        {{/unless}}
+        <table class='table table-bordered table-striped'>
+          <thead>
+            <tr>
+              <th>Collection Name</th>
+              <th>Number of Records</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each collections}}
+            <tr>
+              <td><a href="{{pathFor 'houston_collection'}}">{{name}}</a></td>
+              <td>{{ num_of_records }}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{/if}}
+  </div>
+</template>
