@@ -44,6 +44,14 @@ Template.groupDetail.helpers({
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId) != null;
     }
+//    topProposal: function() {
+//        var proposals = Template.groupDetail.helpers.proposals();
+//        myProposals = [];
+//        _.forEach(propasals, function(propasal, i, propasals) {
+//            myProposals.push(Admitters.find({'proposalId': proposalId}).count());
+//            console.log(myProposals);
+//        });
+//    }
 });
 
 Template.admitterList.helpers({
@@ -52,8 +60,7 @@ Template.admitterList.helpers({
         return Admitters.find({'proposalId': proposalId});
     },
     renderDraggable: function(id) {
-        console.log(id);
-        return Meteor.userId() == id ? "draggable" : "";
+        return (Meteor.userId()+Session.get("currentDate")) == id ? "draggable" : "";
     }
 });
 
