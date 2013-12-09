@@ -17,7 +17,12 @@ Template.groupDetail.helpers({
     groupObject: function(){
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId);
-
+    },
+    hasGroup: function() {
+//        todo@cba wie kann ich auf groupObject zugreifen?
+       // return groupObject != null;
+        var groupId = Session.get('selectedGroup');
+        return Groups.findOne(groupId) != null;
     }
 });
 
