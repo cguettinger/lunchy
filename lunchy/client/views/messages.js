@@ -1,4 +1,4 @@
-var messageHandle = Meteor.subscribeWithPagination('messages', 25);
+var messageHandle = Meteor.subscribeWithPagination('messages', 20);
 
 
 Template.messages.helpers({
@@ -67,12 +67,12 @@ Template.messagesItems.helpers({
         return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
     },
     showLoadNextButton: function(){
-        Meteor.call('messagesCount', function(error, result){
+        Meteor.call('messagesCount',Session.get('selectedGroup') , function(error, result){
             Session.set('messagesCount', result);
             return result;
         });
-        console.log("loaded : " + Messages.find().count() + ", count: " +  Session.get('messagesCount'));
-        return (Messages.find().count() != Session.get('messagesCount'));
+        console.log("loaded : " + Messages.find({groupId:Session.get('selectedGroup')}).count() + ", count: " +  Session.get('messagesCount'));
+        return (Messages.find({groupId:Session.get('selectedGroup')}).count() != Session.get('messagesCount'));
     }
 
 });

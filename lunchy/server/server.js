@@ -53,9 +53,9 @@ Meteor.methods({
     printInfos: function() {
         console.log("usersToGroups: " + UsersToGroups.find().count());
     },
-    messagesCount: function(){
+    messagesCount: function(id){
         console.log( "messages Count " + Messages.find().count());
-        return Messages.find().count();
+        return Messages.find({groupId:id}).count();
     }
 });
 
