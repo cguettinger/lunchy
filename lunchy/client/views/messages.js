@@ -5,6 +5,14 @@ Template.messages.helpers({
     hasGroup: function() {
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId) != null;
+    },
+    disabledOnOtherGroups: function(){
+        var selectedGroupId = Session.get('selectedGroup');
+        if(UsersToGroups.find({userId: Meteor.userId(), group: selectedGroupId}).count() == 0){
+            return "disabled='disabled'";
+        }else{
+            return "";
+        }
     }
 });
 

@@ -60,7 +60,12 @@ Template.admitterList.helpers({
         return Admitters.find({'proposalId': proposalId});
     },
     renderDraggable: function(id) {
-        return (Meteor.userId()+Session.get("currentDate")) == id ? "draggable" : "";
+        var selectedGroupId = Session.get('selectedGroup');
+        if(UsersToGroups.find({userId: Meteor.userId(), group: selectedGroupId}).count() == 0){
+            return "";
+        }else{
+            return (Meteor.userId()+Session.get("currentDate")) == id ? "draggable" : "";
+        }
     }
 });
 
