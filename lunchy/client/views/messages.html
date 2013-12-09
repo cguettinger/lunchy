@@ -13,9 +13,9 @@
 
 <template name="messagesItems">
     <div id="lunchy-message" class="row-fluid">
-        <ul class="">
+        <ul class="media-list">
             {{#each messages}}
-            <li><span class="badge">{{author}}</span>&nbsp;&nbsp;&nbsp;<span class="">{{message}}</span>&nbsp;</li>
+            <li class="media"><span class="badge">{{author}}</span>&nbsp;&nbsp;&nbsp;<span class="">{{message}}</span>&nbsp;</li>
             {{/each}}
         </ul>
     </div>
