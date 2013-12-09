@@ -1,4 +1,6 @@
-Meteor.subscribe("messages");
+//Meteor.subscribe("messages");
+var messageHandle = Meteor.subscribeWithPagination('messages', 5);
+
 
 var previousMessagesDate = null;
 Template.messagesItems.helpers({
@@ -19,10 +21,24 @@ Template.messagesItems.helpers({
     formattedDate: function (timestamp) {
         var date = new Date(timestamp);
         return date.getDay() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + "  " + date.getMinutes();
+    },
+
+    showLoadNextButton: function(){
+        Meteor.call('messagesCount', function(error, result){
+           Session.set('messagesCount', result);
+           return result;
+        });
+        //console.log("loaded : " + Messages.find().count() + ", count: " +  Session.get('messagesCount'));
+        return (Messages.find().count() != Session.get('messagesCount'));
     }
 
 });
 
+Meteor.methods({
+    messagesCount: function(){
+        console.log( "client side messages Count " + Messages.find().count());
+    }
+});
 
 
 Template.messages.events({
@@ -35,5 +51,10 @@ Template.messages.events({
 
         Messages.insert(message);
         $(evt.target).find("input").val("");
+    },
+
+    'click .loadNextButton': function(evt){
+        evt.preventDefault();
+        messageHandle.loadNextPage();
     }
 });
