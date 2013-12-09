@@ -41,6 +41,10 @@ Template.admitterList.helpers({
 
     admittersOfProposal: function(proposalId){
         return Admitters.find({'proposalId': proposalId});
+    },
+    renderDraggable: function(id) {
+        console.log(id);
+        return Meteor.userId() == id ? "draggable" : "";
     }
 });
 
@@ -76,37 +80,21 @@ Template.groupDetail.events(
                 };
                 var id = Admitters.insert(insert);
             }
-        }, 'bind .proposalDroppable': function (evt) {
-        console.log("onmouseover");
-            var proposalId = $(evt.currentTarget).attr("id").split('_')[1];
-            $("#" + proposalId).click();
-            }, '.mouseover .draggable': function (evt) {
-                $(evt.currentTarget).draggable();
-            },
-        'mouseover .draggable': function (evt) {
-            addDroppable()
-
         }
-
-
     }
 );
 
-
-
-function addDroppable() {
+Template.groupDetail.rendered = function () {
+    $( ".draggable" ).draggable();
     $(".proposalDroppable").droppable({
-        activeClass: "ui-state-hover",
-        hoverClass: "ui-state-active",
+        activeClass: "activeColor",
+        hoverClass: "hoverColor",
+
         drop: function (event, ui) {
-            console.log("drop");
-            var proposalId = $(evt.currentTarget).attr("id").split('_')[1];
-            console.log("proposalId " + proposalId);
-            console.log("ui " + ui);
+            var proposalId = $(this).attr("id").split('_')[1];
             $("#" + proposalId).click();
         }
-
     });
-    console.log("addDroppable");
-}
+};
+
 

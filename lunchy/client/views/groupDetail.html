@@ -22,7 +22,7 @@
         </div>
     </div>
     {{#each proposals}}
-        <div class="row-fluid proposalDroppable" id="proposal_{{_id}}">
+        <div class="row-fluid proposalDroppable well well-small" id="proposal_{{_id}}">
             <div class="span6">
                 <button {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn btn-info proposalbutton" id="{{_id}}" type="button">
                     <span class="badge">{{creatorName}}</span>
@@ -51,6 +51,6 @@
 
 <template name="admitterList">
     {{#each admittersOfProposal this._id}}
-    <div class="badge draggable" id="{{this._id}}">{{admitterName}}</div>
+    <div class="badge user {{renderDraggable this._id}}" id="{{this._id}}">{{admitterName}}</div>
     {{/each}}
 </template>
