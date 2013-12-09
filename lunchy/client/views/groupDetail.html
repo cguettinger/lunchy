@@ -6,13 +6,13 @@
     </div>
     <div class="row-fluid">
         <div class="span4">
-            <input id="proposalDescription" type="text" placeholder="neuer Vorschlag">
+            <input id="proposalDescription" {{disabledOnOtherGroups}} type="text" placeholder="neuer Vorschlag">
         </div>
         <div class="span4">
-            <input id="proposalTime" type="text" placeholder="hh:mm">
+            <input id="proposalTime" {{disabledOnOtherGroups}} type="text" placeholder="hh:mm">
         </div>
         <div class="span4">
-            <button id="create_proposal" class="btn btn-primary" type="button">Hinzufügen</button>
+            <button id="create_proposal" {{disabledOnOtherGroups}} class="btn btn-primary" type="button">Hinzufügen</button>
         </div>
     </div>
     <div class="row-fluid">
@@ -24,7 +24,7 @@
         <div class="row-fluid">
             <div class="span6">
                 <button class="btn btn-info" type="button">
-                    <span class="badge">{{userNameByUserId creator}}</span>
+                    <span class="badge">{{creatorName}}</span>
                     &nbsp;{{description}}
                     <span class="badge">{{time}}</span>
                 </button>

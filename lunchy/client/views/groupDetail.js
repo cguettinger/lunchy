@@ -29,6 +29,14 @@ var proposalData =
     ];
 
 Template.groupDetail.helpers({
+    disabledOnOtherGroups: function(){
+        var selectedGroupId = Session.get('selectedGroup');
+        if(UsersToGroups.find({userId: Meteor.userId(), group: selectedGroupId}).count() == 0){
+            return "disabled='disabled'";
+        }else{
+            return "";
+        }
+    },
     proposals: function(){
         var selectedGroupId = Session.get('selectedGroup');
         return Proposals.find({'groupId' : selectedGroupId});
@@ -37,10 +45,6 @@ Template.groupDetail.helpers({
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId);
 
-    },
-    userNameByUserId: function(creatorUserId)
-    {
-        return Meteor.call('userNameByUserId', creatorUserId);
     }
 });
 
@@ -52,6 +56,7 @@ Template.groupDetail.events(
                 description: $("#proposalDescription").val(),
                 time: $("#proposalTime").val(),
                 creator: Meteor.userId(),
+                creatorName: Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
                 groupId: Session.get('selectedGroup')
             };
 

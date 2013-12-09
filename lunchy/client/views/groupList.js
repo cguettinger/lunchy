@@ -53,7 +53,7 @@ Template.groupList.events({
         if(UsersToGroups.find({userId: Meteor.userId(), group: $(evt.currentTarget).attr("href")}).count() == 0){
             UsersToGroups.insert({userId: Meteor.userId(), group: $(evt.currentTarget).attr("href")});
         }
-        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
+        //console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
         Meteor.call('ntntInfos');
     },
 
@@ -61,9 +61,9 @@ Template.groupList.events({
         evt.preventDefault();
         var aUsersToGroups = UsersToGroups.find({userId: Meteor.userId(), group: $(evt.currentTarget).attr("href")}).fetch();
 
-        console.log("minus: " + aUsersToGroups);
-        UsersToGroups.remove(aUsersToGroups._id);
-        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
+        //console.log("minus: " + aUsersToGroups[0]._id);
+        UsersToGroups.remove(aUsersToGroups[0]._id);
+        //console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
         Meteor.call('printInfos');
     },
 
