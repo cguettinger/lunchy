@@ -38,13 +38,9 @@ Template.groupDetail.helpers({
         return Groups.findOne(groupId);
 
     },
-    userNameByUserId: function(creator)
+    userNameByUserId: function(creatorUserId)
     {
-        console.log("creator: " + creator);
-        //console.log("from server: " + Meteor.call('userNameByUserId', creator));
-        Meteor.call('userNameByUserId', creator, function(userName) {
-            return userName;
-        });
+        return Meteor.call('userNameByUserId', creatorUserId);
     }
 });
 
