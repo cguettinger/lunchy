@@ -1,4 +1,23 @@
 <template name="groupDetail">
+   <div class="row-fluid">
+
+       <div class="span12">
+           <div class="btn-toolbar" role="toolbar">
+               <div class="btn-group">
+                   <a id="btnDatePast" class="btn btn-default" role="button">Früher</a>
+               </div>
+               <div class="btn-group">
+                   <a id="btnCurrentDateLabel" disabled="disabled" class="btn btn-default" role="button">{{showDate}}</a>
+               </div>
+               <div class="btn-group">
+                   <a id="btnDateFuture" class="btn btn-default" role="button">Später</a>
+               </div>
+           </div>
+       </div>
+
+   </div>
+
+    <div class="hero-unit">
     <div class="row-fluid">
         <div class="span12">
             <h3>{{groupObject.name}}</h3>
@@ -38,6 +57,8 @@
             </div>
         </div>
     {{/each}}
+</div>
+
 </template>
 
 

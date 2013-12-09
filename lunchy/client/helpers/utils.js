@@ -15,3 +15,9 @@ formattedDate = function(date){
 dateFromString = function(string){
     return new Date(string);
 };
+
+dateStringFromDateWithFormat = function (date, format){
+
+    date.toString(format);
+
+};

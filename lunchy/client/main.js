@@ -1,7 +1,7 @@
 /* Any main.* file is loaded after everything else. */
 
 Meteor.startup(function () {
-
+    moment.lang('de');
     Session.set('currentDate',currentDateWithoutTime());
 
     bootbox.animate(false);

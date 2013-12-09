@@ -43,20 +43,6 @@
 
 <template name="lunchyContentArea">
     {{#if isLoggedIn}}
-    <div class="row-fluid">
-        <div class="span12" id="lunchy-datepicker">
-
-            <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
     <div id="lunchny-container" class="row-fluid">
         <div class="span3" id="lunchy-sidebar">
             <div class="well sidebar-nav">
@@ -64,9 +50,9 @@
             </div>
         </div>
         <div class="span9" id="lunchy-content">
-            <div class="hero-unit">
-                    {{> groupDetail}}
-            </div>
+
+            {{> groupDetail}}
+
             <div class="hero-unit">
                     {{> messages}}
             </div>

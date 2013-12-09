@@ -57,7 +57,8 @@ Meteor.methods({
 
 Admitters.allow({
     insert: checkInsertAllowed,
-    update:checkInsertAllowed
+    update:checkInsertAllowed,
+    remove:checkInsertAllowed
 });
 
 Messages.allow({

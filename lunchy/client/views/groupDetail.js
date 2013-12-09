@@ -29,6 +29,16 @@ Template.groupDetail.helpers({
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId);
 
+    },
+    showDate: function(){
+        var currentDate = Session.get('currentDate');
+        var today = currentDateWithoutTime();
+        if(currentDate === today){
+            return "Heute, " + moment(currentDate).format('LL');
+        }else{
+            return moment(currentDate).format('LL');
+        }
+
     }
 });
 
@@ -59,18 +69,46 @@ Template.groupDetail.events(
         'click .proposalbutton': function (evt) {
 
             var proposalId = $(evt.currentTarget).attr("id");
-            var result = Admitters.findOne(Meteor.userId());
+            var currentDate = Session.get('currentDate');
 
-            if(result) {
-                Admitters.update(Meteor.userId(), {$set: {proposalId:proposalId}});
+
+            var result = Admitters.findOne(Meteor.userId()+currentDate);
+
+
+            if(result && result.proposalId == proposalId) {
+                Admitters.remove(Meteor.userId()+currentDate);
+            }
+            else if(result) {
+                Admitters.update(Meteor.userId() + currentDate, {$set: {proposalId:proposalId}});
             } else {
                 var insert = {
-                    _id: Meteor.userId(),
+                    _id: Meteor.userId() + currentDate,
                     admitterName:Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
                     proposalId:proposalId
                 };
                 var id = Admitters.insert(insert);
             }
+        },
+        'click #btnDatePast': function (evt) {
+            var currentDateString = Session.get('currentDate');
+            var currentDateTimestamp = dateFromString(currentDateString).getTime();
+            var currentDateTimestampMinusOneDay = currentDateTimestamp - (60*60*24*1000);
+            var currentDateMinusOneDay = new Date(currentDateTimestampMinusOneDay);
+            console.log("click .btnDatePast: " + currentDateString);
+            Session.set('currentDate', formattedDate(currentDateMinusOneDay));
+            currentDateString = Session.get('currentDate');
+            console.log("click .btnDatePast: " + currentDateString);
+        },
+        'click #btnDateFuture': function (evt) {
+            var currentDateString = Session.get('currentDate');
+            var currentDateTimestamp = dateFromString(currentDateString).getTime();
+            var currentDateTimestampMinusOneDay = currentDateTimestamp + (60*60*24*1000);
+            var currentDatePlusOneDay = new Date(currentDateTimestampMinusOneDay);
+            console.log("click .btnDateFuture: " + currentDateString);
+            Session.set('currentDate', formattedDate(currentDatePlusOneDay));
+            currentDateString = Session.get('currentDate');
+            console.log("click .btnDateFuture: " + currentDateString);
         }
+
     }
 );
