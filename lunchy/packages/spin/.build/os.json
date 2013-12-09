@@ -1,0 +1,19 @@
+{
+  "format": "unipackage-slice-pre1",
+  "packageVariables": [],
+  "uses": [
+    {
+      "package": "meteor"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/spin.js",
+      "length": 0,
+      "offset": 0,
+      "servePath": "/packages/spin.js",
+      "sourceMap": "os/packages/spin.js.map"
+    }
+  ]
+}

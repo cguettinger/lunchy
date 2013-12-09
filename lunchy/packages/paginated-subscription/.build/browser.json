@@ -1,0 +1,23 @@
+{
+  "format": "unipackage-slice-pre1",
+  "packageVariables": [
+    {
+      "name": "PaginatedSubscriptionHandle"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "browser/packages/paginated-subscription.js",
+      "length": 6266,
+      "offset": 0,
+      "servePath": "/packages/paginated-subscription.js",
+      "sourceMap": "browser/packages/paginated-subscription.js.map"
+    }
+  ]
+}

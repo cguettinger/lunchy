@@ -1,0 +1,33 @@
+{
+  "format": "unipackage-slice-pre1",
+  "noExports": true,
+  "packageVariables": [],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "iron-router"
+    },
+    {
+      "package": "tinytest"
+    },
+    {
+      "package": "test-helpers"
+    },
+    {
+      "package": "reactive-dict"
+    }
+  ],
+  "node_modules": "npm/node_modules",
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "tests.os/packages/iron-routertests.js",
+      "length": 48116,
+      "offset": 0,
+      "servePath": "/packages/iron-router:tests.js",
+      "sourceMap": "tests.os/packages/iron-routertests.js.map"
+    }
+  ]
+}

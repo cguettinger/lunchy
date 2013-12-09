@@ -1,0 +1,42 @@
+{
+  "format": "unipackage-slice-pre1",
+  "noExports": true,
+  "packageVariables": [
+    {
+      "name": "Subscription"
+    },
+    {
+      "name": "MockRouter"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "iron-router"
+    },
+    {
+      "package": "tinytest"
+    },
+    {
+      "package": "test-helpers"
+    },
+    {
+      "package": "reactive-dict"
+    },
+    {
+      "package": "templating"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "tests.browser/packages/iron-routertests.js",
+      "length": 91817,
+      "offset": 0,
+      "servePath": "/packages/iron-router:tests.js",
+      "sourceMap": "tests.browser/packages/iron-routertests.js.map"
+    }
+  ]
+}
