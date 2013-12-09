@@ -1,4 +1,5 @@
 <template name="messages">
+    {{#if hasGroup}}
     <div class="input-append">
         <form id="add_message" class="form-horizontal">
             <div class="input-append">
@@ -9,6 +10,9 @@
         </form>
     </div>
     {{> messagesItems}}
+    {{else}}
+    Nachrichten sind nur für Gruppen möglich
+    {{/if}}
 </template>
 
 <template name="messagesItems">

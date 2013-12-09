@@ -1,5 +1,13 @@
 var messageHandle = Meteor.subscribeWithPagination('messages', 25);
 
+
+Template.messages.helpers({
+    hasGroup: function() {
+        var groupId = Session.get('selectedGroup');
+        return Groups.findOne(groupId) != null;
+    }
+});
+
 Template.messagesItems.helpers({
     messageGroups: function()
     {
