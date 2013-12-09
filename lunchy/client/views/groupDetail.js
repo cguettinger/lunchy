@@ -14,7 +14,7 @@ Template.groupDetail.helpers({
         var currentDateString = Session.get('currentDate');
         var currentDate = dateFromString(currentDateString);
         console.log('currentDateParsed:', currentDate);
-        if(currentDate.getTime() < new Date().getTime()){
+        if(currentDate.getTime() < dateFromString(currentDateWithoutTime()).getTime()){
             return "disabled='disabled'";
         }else{
             return "";
