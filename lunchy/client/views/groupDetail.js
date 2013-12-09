@@ -1,4 +1,5 @@
 Meteor.subscribe('proposals');
+Meteor.subscribe('admitters');
 
 var proposalData =
     [
@@ -40,6 +41,13 @@ Template.groupDetail.helpers({
     }
 });
 
+Template.admitterList.helpers({
+
+    admittersOfProposal: function(proposalId){
+        return Admitters.find({'proposalId': proposalId}).fetch();
+    }
+});
+
 Template.groupDetail.events(
     {
         'click #create_proposal': function (evt) {
@@ -53,6 +61,22 @@ Template.groupDetail.events(
             };
 
             Proposals.insert(insert);
+        },
+        'click .proposalbutton': function (evt) {
+
+            var proposalId = $(evt.currentTarget).attr("id");
+            var result = Admitters.findOne(Meteor.userId());
+
+            if(result) {
+                Admitters.update(Meteor.userId(), {$set: {proposalId:proposalId}});
+            } else {
+                var insert = {
+                    _id: Meteor.userId(),
+                    admitterName:Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
+                    proposalId:proposalId
+                };
+                var id = Admitters.insert(insert);
+            }
         }
     }
 );

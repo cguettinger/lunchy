@@ -23,7 +23,7 @@
     {{#each proposals}}
         <div class="row-fluid">
             <div class="span6">
-                <button class="btn btn-info" type="button">
+                <button class="btn btn-info proposalbutton" id="{{_id}}" type="button">
                     <span class="badge">{{creatorName}}</span>
                     &nbsp;{{description}}
                     <span class="badge">{{time}}</span>
@@ -32,13 +32,17 @@
             <div class="span6">
                 <div class="row-fluid">
                     <div class="span12">
-                        <span class="badge badge-info">{{admiters.length}}</span>
-                        {{#each admiters}}
-                            <span class="badge">{{name}}</span>
-                        {{/each}}
+                        {{> admitterList}}
                     </div>
                 </div>
             </div>
         </div>
+    {{/each}}
+</template>
+
+
+<template name="admitterList">
+    {{#each admittersOfProposal this._id}}
+    <span class="badge">{{admitterName}}</span>
     {{/each}}
 </template>
