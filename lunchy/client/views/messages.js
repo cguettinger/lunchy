@@ -17,8 +17,17 @@ Template.messagesItems.helpers({
                 currentGroupDate                    = new Date(message.timestamp);
             }
 
+            if(i == allMessageList.length-1)
+            {
+                messageList[messageListCounter]         = message;
+            }
+
             if(dateChanged(currentGroupDate, message.timestamp) || i == allMessageList.length-1)
             {
+                if(i == allMessageList.length-1)
+                {
+                    messageList[messageListCounter]         = message;
+                }
                 var day                             = "" + currentGroupDate.getDate();
                 if(day.length < 2)
                 {
@@ -37,7 +46,10 @@ Template.messagesItems.helpers({
                 messageGroupCounter++;
                 messageListCounter                  = 0;
             }
-            messageList[messageListCounter]         = message;
+            else
+            {
+                messageList[messageListCounter]         = message;
+            }
             messageListCounter++;
         }
         return messageGroups;
