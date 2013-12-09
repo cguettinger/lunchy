@@ -20,7 +20,7 @@ Template.messagesItems.helpers({
 
             if(dateChanged(currentGroupDate, message.timestamp) || i == allMessageList.length-1)
             {
-                var day                             = "" + currentGroupDate.getDay();
+                var day                             = "" + currentGroupDate.getDate();
                 if(day.length < 2)
                 {
                     day = "0" + day;
@@ -45,7 +45,7 @@ Template.messagesItems.helpers({
     },
     formattedDate: function (timestamp) {
         var date = new Date(timestamp);
-        return date.getDay() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+        return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
     },
     showLoadNextButton: function(){
         Meteor.call('messagesCount', function(error, result){
@@ -62,7 +62,7 @@ function dateChanged(currentGroupDate, timestamp)
 {
     var date        = new Date(timestamp);
     var returnValue = false;
-    if (!(currentGroupDate.getYear() == date.getYear() && currentGroupDate.getMonth() == date.getMonth() && currentGroupDate.getDay() == date.getDay()))
+    if (!(currentGroupDate.getYear() == date.getYear() && currentGroupDate.getMonth() == date.getMonth() && currentGroupDate.getDate() == date.getDate()))
     {
         returnValue = true;
     }
