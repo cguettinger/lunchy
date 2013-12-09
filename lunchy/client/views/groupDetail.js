@@ -10,9 +10,20 @@ Template.groupDetail.helpers({
             return "";
         }
     },
+    disabledForPastProposals:function(){
+        var currentDateString = Session.get('currentDate');
+        var currentDate = dateFromString(currentDateString);
+        console.log('currentDateParsed:', currentDate);
+        if(currentDate.getTime() < new Date().getTime()){
+            return "disabled='disabled'";
+        }else{
+            return "";
+        }
+    },
     proposals: function(){
         var selectedGroupId = Session.get('selectedGroup');
-        return Proposals.find({'groupId' : selectedGroupId});
+        var dateFromSession = Session.get('currentDate');
+        return Proposals.find({'groupId' : selectedGroupId, 'creationDate': dateFromSession});
     },
     groupObject: function(){
         var groupId = Session.get('selectedGroup');
@@ -24,17 +35,20 @@ Template.groupDetail.helpers({
 Template.admitterList.helpers({
 
     admittersOfProposal: function(proposalId){
-        return Admitters.find({'proposalId': proposalId}).fetch();
+        return Admitters.find({'proposalId': proposalId});
     }
 });
 
 Template.groupDetail.events(
     {
+        //TODO: checken ob date in der Vergangenheit liegt.
         'click #create_proposal': function (evt) {
             evt.preventDefault();
+            var dateFromSession = Session.get('currentDate');
             var insert = {
                 description: $("#proposalDescription").val(),
                 time: $("#proposalTime").val(),
+                creationDate: dateFromSession,
                 creator: Meteor.userId(),
                 creatorName: Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
                 groupId: Session.get('selectedGroup')
