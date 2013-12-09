@@ -4,7 +4,7 @@ var previousMessagesDate = null;
 Template.messagesItems.helpers({
 
     messages: function () {
-        return Messages.find({}, {sort: {timestamp: -1}});
+        return Messages.find({groupId:Session.get('selectedGroup')}, {sort: {timestamp: -1}});
     },
     dateChanged: function (timestamp) {
         var date = new Date(timestamp);
@@ -21,8 +21,24 @@ Template.messagesItems.helpers({
         return date.getDay() + "." + (date.getMonth() + 1) + "." + date.getFullYear() + "  " + date.getMinutes();
     }
 
-});
+//    messagesGroup: function () {
+//        var allMessagesList = messages.fetch();
+//
+//        var messagesGroups = new Array();
+//        var subList = new Array();
+//        for (var i = 0; i < allMessagesList.length; i++) {
+//            var message = allMessagesList.get(i);
+//            subList.add(message);
+//            Tageswechsel
+//            messagesGroups[0] = {day: "", list: subList}
+//
+//        }
+//
+//    }
 
+
+
+});
 
 
 Template.messages.events({
@@ -32,8 +48,10 @@ Template.messages.events({
         message.message = $(evt.target).find("input").val();
         message.author = Meteor.user().emails[0].address.split("@")[0];
         message.timestamp = new Date().getTime();
+        message.groupId=Session.get('selectedGroup');
 
         Messages.insert(message);
+
         $(evt.target).find("input").val("");
     }
 });
