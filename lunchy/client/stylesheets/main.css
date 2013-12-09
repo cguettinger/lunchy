@@ -28,3 +28,7 @@ body > .container-fluid
 .draggable {
     cursor: pointer;
 }
+
+.draggable:hover {
+    background-color: cornflowerblue;
+}
