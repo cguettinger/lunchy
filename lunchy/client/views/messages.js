@@ -1,12 +1,11 @@
-
-var messageHandle = Meteor.subscribeWithPagination('messages', 5);
+var messageHandle = Meteor.subscribeWithPagination('messages', 25);
 
 Template.messagesItems.helpers({
     messageGroups: function()
     {
         var messageGroupCounter                     = 0;
         var messageGroups                           = new Array();
-        var messageListCounter                     = 0;
+        var messageListCounter                      = 0;
         var messageList                             = new Array();
         var allMessageList                          = Messages.find({groupId:Session.get('selectedGroup')}, {sort: {timestamp: -1}}).fetch();
         var currentGroupDate                        = null;
@@ -18,8 +17,17 @@ Template.messagesItems.helpers({
                 currentGroupDate                    = new Date(message.timestamp);
             }
 
+            if(i == allMessageList.length-1)
+            {
+                messageList[messageListCounter]         = message;
+            }
+
             if(dateChanged(currentGroupDate, message.timestamp) || i == allMessageList.length-1)
             {
+                if(i == allMessageList.length-1)
+                {
+                    messageList[messageListCounter]         = message;
+                }
                 var day                             = "" + currentGroupDate.getDate();
                 if(day.length < 2)
                 {
@@ -38,7 +46,10 @@ Template.messagesItems.helpers({
                 messageGroupCounter++;
                 messageListCounter                  = 0;
             }
-            messageList[messageListCounter]         = message;
+            else
+            {
+                messageList[messageListCounter]         = message;
+            }
             messageListCounter++;
         }
         return messageGroups;
