@@ -51,7 +51,6 @@ Template.messagesItems.helpers({
             Session.set('messagesCount', result);
             return result;
         });
-        console.log("loaded : " + Messages.find().count() + ", count: " +  Session.get('messagesCount'));
         return (Messages.find().count() != Session.get('messagesCount'));
     }
 
