@@ -7,7 +7,7 @@ Template.messagesItems.helpers({
         var messageGroups                           = new Array();
         var messageListCounter                     = 0;
         var messageList                             = new Array();
-        var allMessageList                          = Messages.find({}, {sort: {timestamp: -1}}).fetch();
+        var allMessageList                          = Messages.find({groupId:Session.get('selectedGroup')}, {sort: {timestamp: -1}}).fetch();
         var currentGroupDate                        = null;
         for(var i = 0; i < allMessageList.length; i++)
         {
