@@ -23,7 +23,7 @@
     {{#each proposals}}
         <div class="row-fluid">
             <div class="span6">
-                <button class="btn btn-info proposalbutton" id="{{_id}}" type="button">
+                <button {{disabledOnOtherGroups}} class="btn btn-info proposalbutton" id="{{_id}}" type="button">
                     <span class="badge">{{creatorName}}</span>
                     &nbsp;{{description}}
                     <span class="badge">{{time}}</span>
