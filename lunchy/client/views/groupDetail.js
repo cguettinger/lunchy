@@ -76,6 +76,37 @@ Template.groupDetail.events(
                 };
                 var id = Admitters.insert(insert);
             }
+        }, 'bind .proposalDroppable': function (evt) {
+        console.log("onmouseover");
+            var proposalId = $(evt.currentTarget).attr("id").split('_')[1];
+            $("#" + proposalId).click();
+            }, '.mouseover .draggable': function (evt) {
+                $(evt.currentTarget).draggable();
+            },
+        'mouseover .draggable': function (evt) {
+            addDroppable()
+
         }
+
+
     }
 );
+
+
+
+function addDroppable() {
+    $(".proposalDroppable").droppable({
+        activeClass: "ui-state-hover",
+        hoverClass: "ui-state-active",
+        drop: function (event, ui) {
+            console.log("drop");
+            var proposalId = $(evt.currentTarget).attr("id").split('_')[1];
+            console.log("proposalId " + proposalId);
+            console.log("ui " + ui);
+            $("#" + proposalId).click();
+        }
+
+    });
+    console.log("addDroppable");
+}
+
