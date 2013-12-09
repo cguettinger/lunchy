@@ -29,6 +29,14 @@ var proposalData =
     ];
 
 Template.groupDetail.helpers({
+    disabledOnOtherGroups: function(){
+        var selectedGroupId = Session.get('selectedGroup');
+        if(UsersToGroups.find({userId: Meteor.userId(), group: selectedGroupId}).count() == 0){
+            return "disabled='disabled'";
+        }else{
+            return "";
+        }
+    },
     proposals: function(){
         var selectedGroupId = Session.get('selectedGroup');
         return Proposals.find({'groupId' : selectedGroupId});
