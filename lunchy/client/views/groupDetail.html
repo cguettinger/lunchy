@@ -21,40 +21,32 @@
                 <h3>{{groupObject.name}}</h3>
             </div>
         </div>
-        <div class="row-fluid">
-            <div class="span4">
-                <input id="proposalDescription" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="neuer Vorschlag">
-            </div>
-            <div class="span4">
-                <input id="proposalTime" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="hh:mm">
-            </div>
-            <div class="span4">
-                <button id="create_proposal" {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn btn-primary" type="button">Hinzufügen</button>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class ="span12">
-                <h4>Vorschläge</h4>
-            </div>
-        </div>
         {{#each proposals}}
-            <div class="row-fluid proposalDroppable well well-small" id="proposal_{{_id}}">
-                <div class="span6">
-                    <button {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn btn-info proposalbutton" id="{{_id}}" type="button">
-                        <span class="badge">{{creatorName}}</span>
-                        &nbsp;{{description}}
-                        <span class="badge">{{time}}</span>
+            <div class="row-fluid proposalDroppable" id="proposal_{{_id}}">
+                <div class="span12">
+                    <button class="btn btn-large proposalbutton" id="{{_id}}" type="button" {{disabledOnOtherGroups}} {{disabledForPastProposals}} >
+                    <span class="badge creatorBadge pull-left">{{creatorName}}</span>
+                    <span class="pull-left">{{time}}</span>
+                    <span class="pull-left">&nbsp;{{description}}</span>
+                    <span class="pull-right">
+                        {{> admitterList}}
+                    </span>
                     </button>
                 </div>
-                <div class="span6">
-                    <div class="row-fluid">
-                        <div class="span12">
-                            {{> admitterList}}
-                        </div>
-                    </div>
-                </div>
+
             </div>
         {{/each}}
+
+        <div class="row-fluid newProposalForm">
+            <div class="span12">
+                <!-- TODO: schöner machen und auf responsive achten -->
+                <input id="proposalTime" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="hh:mm">
+                <input id="proposalDescription" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="neuer Vorschlag">
+                <button id="create_proposal" {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn push-left btn-primary" type="button">Hinzufügen</button>
+            </div>
+
+        </div>
+
     {{else}}
         <div class="row-fluid">
             <div class="span12">
@@ -68,6 +60,6 @@
 
 <template name="admitterList">
     {{#each admittersOfProposal this._id}}
-    <div class="badge user {{renderDraggable this._id}}" id="{{this._id}}">{{admitterName}}</div>
+    <div class="badge {{renderBadgeType this.admitterId}} user {{renderDraggable this._id}}" id="{{this._id}}">{{admitterName}}</div>
     {{/each}}
 </template>

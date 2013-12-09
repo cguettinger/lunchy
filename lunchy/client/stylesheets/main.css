@@ -3,12 +3,6 @@ body{
     background-size:cover;
 }
 
-body > .container-fluid
-{
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 .well {
     margin-bottom: 0;
 }
@@ -31,4 +25,37 @@ body > .container-fluid
 
 .draggable:hover {
     background-color: cornflowerblue;
+}
+
+.hero-unit {
+    padding:20px;
+}
+
+.proposalDroppable
+{
+
+}
+
+.creatorBadge
+{
+    margin-top:7px;
+    margin-right:5px;
+
+}
+
+.newProposalForm
+{
+    padding-top:20px;
+}
+
+.newProposalForm input
+{
+    width:auto;
+}
+
+.proposalbutton
+{
+    width:100%;
+    margin: 7px auto;
+    line-height: 29px;
 }
