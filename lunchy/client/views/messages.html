@@ -15,7 +15,13 @@
     <div id="lunchy-message" class="row-fluid">
         <ul class="media-list">
             {{#each messages}}
-            <li class="media"><span class="badge">{{author}}</span>&nbsp;&nbsp;&nbsp;<span class="">{{message}}</span>&nbsp;</li>
+            <li class="media"><span class="badge">{{author}}</span>&nbsp;&nbsp;&nbsp;<span class="">{{message}}</span>&nbsp;
+            </li>
+            {{#if dateChanged timestamp}}
+        </ul>
+        <div>{{formattedDate timestamp }}</div>
+        <ul class="media-list">
+            {{/if}}
             {{/each}}
         </ul>
     </div>
