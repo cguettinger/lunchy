@@ -61,6 +61,13 @@ Template.admitterList.helpers({
     },
     renderDraggable: function(id) {
         return (Meteor.userId()+Session.get("currentDate")) == id ? "draggable" : "";
+    },
+    renderBadgeType: function(admitterId){
+        if(admitterId === Meteor.userId()){
+            return 'badge-warning'
+        } else {
+            return 'badge-info';
+        }
     }
 });
 
@@ -98,6 +105,7 @@ Template.groupDetail.events(
             } else {
                 var insert = {
                     _id: Meteor.userId() + currentDate,
+                    admitterId: Meteor.userId(),
                     admitterName:Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
                     proposalId:proposalId
                 };
