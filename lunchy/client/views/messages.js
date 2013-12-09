@@ -1,12 +1,11 @@
-
-var messageHandle = Meteor.subscribeWithPagination('messages', 5);
+var messageHandle = Meteor.subscribeWithPagination('messages', 25);
 
 Template.messagesItems.helpers({
     messageGroups: function()
     {
         var messageGroupCounter                     = 0;
         var messageGroups                           = new Array();
-        var messageListCounter                     = 0;
+        var messageListCounter                      = 0;
         var messageList                             = new Array();
         var allMessageList                          = Messages.find({groupId:Session.get('selectedGroup')}, {sort: {timestamp: -1}}).fetch();
         var currentGroupDate                        = null;
