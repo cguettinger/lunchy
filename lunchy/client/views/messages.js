@@ -1,4 +1,5 @@
-Meteor.subscribe("messages");
+
+var messageHandle = Meteor.subscribeWithPagination('messages', 5);
 
 Template.messagesItems.helpers({
     messageGroups: function()
@@ -45,6 +46,14 @@ Template.messagesItems.helpers({
     formattedDate: function (timestamp) {
         var date = new Date(timestamp);
         return date.getDay() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+    },
+    showLoadNextButton: function(){
+        Meteor.call('messagesCount', function(error, result){
+            Session.set('messagesCount', result);
+            return result;
+        });
+        console.log("loaded : " + Messages.find().count() + ", count: " +  Session.get('messagesCount'));
+        return (Messages.find().count() != Session.get('messagesCount'));
     }
 
 });
@@ -71,5 +80,10 @@ Template.messages.events({
 
         Messages.insert(message);
         $(evt.target).find("input").val("");
+    },
+
+    'click .loadNextButton': function(evt){
+        evt.preventDefault();
+        messageHandle.loadNextPage();
     }
 });
