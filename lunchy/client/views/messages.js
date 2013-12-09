@@ -19,7 +19,7 @@ Template.messagesItems.helpers({
 
             if(dateChanged(currentGroupDate, message.timestamp) || i == allMessageList.length-1)
             {
-                var day                             = "" + currentGroupDate.getDate();
+                var day                             = "" + currentGroupDate.getDay();
                 if(day.length < 2)
                 {
                     day = "0" + day;
@@ -44,7 +44,7 @@ Template.messagesItems.helpers({
     },
     formattedDate: function (timestamp) {
         var date = new Date(timestamp);
-        return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+        return date.getDay() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
     }
 
 });
@@ -53,7 +53,7 @@ function dateChanged(currentGroupDate, timestamp)
 {
     var date        = new Date(timestamp);
     var returnValue = false;
-    if (!(currentGroupDate.getYear() == date.getYear() && currentGroupDate.getMonth() == date.getMonth() && currentGroupDate.getDate() == date.getDate()))
+    if (!(currentGroupDate.getYear() == date.getYear() && currentGroupDate.getMonth() == date.getMonth() && currentGroupDate.getDay() == date.getDay()))
     {
         returnValue = true;
     }
