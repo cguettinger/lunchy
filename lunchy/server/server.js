@@ -52,15 +52,12 @@ Meteor.publish("usersToGroups", function () {
 Meteor.methods({
     printInfos: function() {
         console.log("usersToGroups: " + UsersToGroups.find().count());
-    },
-    userNameByUserId: function(creatorUserId) {
-        console.log(Meteor.users.findOne(creatorUserId).emails[0].address.split("@")[0]);
-        return Meteor.users.findOne(creatorUserId).emails[0].address.split("@")[0];
     }
 });
 
 Admitters.allow({
-    insert: checkInsertAllowed
+    insert: checkInsertAllowed,
+    update:checkInsertAllowed
 });
 
 Messages.allow({
