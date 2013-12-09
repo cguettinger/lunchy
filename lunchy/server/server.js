@@ -24,8 +24,8 @@ if (Groups.find().count() === 0) {
 }
 checkInsertAllowed = function(userId, doc){ return !! userId; }
 
-Meteor.publish("messages", function () {
-    return Messages.find();
+Meteor.publish('messages', function(limit) {
+    return Messages.find({}, {limit: limit});
 });
 
 Meteor.publish("groups", function () {
@@ -52,6 +52,10 @@ Meteor.publish("usersToGroups", function () {
 Meteor.methods({
     printInfos: function() {
         console.log("usersToGroups: " + UsersToGroups.find().count());
+    },
+    messagesCount: function(){
+        console.log( "messages Count " + Messages.find().count());
+        return Messages.find().count();
     }
 });
 

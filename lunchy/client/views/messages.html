@@ -13,16 +13,21 @@
 
 <template name="messagesItems">
     <div id="lunchy-message" class="row-fluid">
-        <ul class="media-list">
-            {{#each messages}}
-            <li class="media"><span class="badge">{{author}}</span>&nbsp;&nbsp;&nbsp;<span class="">{{message}}</span>&nbsp;
-            </li>
-            {{#if dateChanged timestamp}}
-        </ul>
-        <div>{{formattedDate timestamp }}</div>
-        <ul class="media-list">
-            {{/if}}
-            {{/each}}
-        </ul>
+        {{#each messageGroups}}
+            <div class="well well-large">
+                <div class="alert alert-info">
+                    {{timestamp}}
+                </div>
+                <ul class="media-list">
+                    {{#each messages}}
+                        <li class="media"><span class="badge">{{author}}</span>&nbsp;&nbsp;&nbsp;<span class="">{{message}}</span>&nbsp;</li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/each}}
+
+        {{#if showLoadNextButton}}
+            <div class="btn btn-primary loadNextButton">mehr</div>
+        {{/if}}
     </div>
 </template>

@@ -8,3 +8,27 @@ body > .container-fluid
     max-width: 1200px;
     margin: 0 auto;
 }
+
+.well {
+    margin-bottom: 0;
+}
+.activeColor {
+
+}
+
+.hoverColor {
+    border: 2px inset #6699dd;
+}
+
+.user {
+    font-size: 18px;
+    padding: 9px;
+}
+
+.draggable {
+    cursor: pointer;
+}
+
+.draggable:hover {
+    background-color: cornflowerblue;
+}

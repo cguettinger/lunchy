@@ -28,7 +28,6 @@ Template.groupDetail.helpers({
     groupObject: function(){
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId);
-
     },
     showDate: function(){
         var currentDate = Session.get('currentDate');
@@ -38,7 +37,12 @@ Template.groupDetail.helpers({
         }else{
             return moment(currentDate).format('LL');
         }
-
+    },
+    hasGroup: function() {
+//        todo@cba wie kann ich auf groupObject zugreifen?
+       // return groupObject != null;
+        var groupId = Session.get('selectedGroup');
+        return Groups.findOne(groupId) != null;
     }
 });
 
@@ -46,6 +50,10 @@ Template.admitterList.helpers({
 
     admittersOfProposal: function(proposalId){
         return Admitters.find({'proposalId': proposalId});
+    },
+    renderDraggable: function(id) {
+        console.log(id);
+        return Meteor.userId() == id ? "draggable" : "";
     }
 });
 
@@ -112,3 +120,18 @@ Template.groupDetail.events(
 
     }
 );
+
+Template.groupDetail.rendered = function () {
+    $( ".draggable" ).draggable();
+    $(".proposalDroppable").droppable({
+        activeClass: "activeColor",
+        hoverClass: "hoverColor",
+
+        drop: function (event, ui) {
+            var proposalId = $(this).attr("id").split('_')[1];
+            $("#" + proposalId).click();
+        }
+    });
+};
+
+

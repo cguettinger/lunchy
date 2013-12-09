@@ -1,69 +1,73 @@
 <template name="groupDetail">
-   <div class="row-fluid">
-
-       <div class="span12">
-           <div class="btn-toolbar" role="toolbar">
-               <div class="btn-group">
-                   <a id="btnDatePast" class="btn btn-default" role="button">Früher</a>
-               </div>
-               <div class="btn-group">
-                   <a id="btnCurrentDateLabel" disabled="disabled" class="btn btn-default" role="button">{{showDate}}</a>
-               </div>
-               <div class="btn-group">
-                   <a id="btnDateFuture" class="btn btn-default" role="button">Später</a>
-               </div>
-           </div>
-       </div>
-
-   </div>
-
     <div class="hero-unit">
-    <div class="row-fluid">
-        <div class="span12">
-            <h3>{{groupObject.name}}</h3>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span4">
-            <input id="proposalDescription" {{disabledOnOtherGroups}} type="text" placeholder="neuer Vorschlag">
-        </div>
-        <div class="span4">
-            <input id="proposalTime" {{disabledOnOtherGroups}} type="text" placeholder="hh:mm">
-        </div>
-        <div class="span4">
-            <button id="create_proposal" {{disabledOnOtherGroups}} class="btn btn-primary" type="button">Hinzufügen</button>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class ="span12">
-            <h4>Vorschläge</h4>
-        </div>
-    </div>
-    {{#each proposals}}
+    {{#if hasGroup}}
         <div class="row-fluid">
-            <div class="span6">
-                <button {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn btn-info proposalbutton" id="{{_id}}" type="button">
-                    <span class="badge">{{creatorName}}</span>
-                    &nbsp;{{description}}
-                    <span class="badge">{{time}}</span>
-                </button>
-            </div>
-            <div class="span6">
-                <div class="row-fluid">
-                    <div class="span12">
-                        {{> admitterList}}
+            <div class="span12">
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group">
+                        <a id="btnDatePast" class="btn btn-default" role="button">Früher</a>
+                    </div>
+                    <div class="btn-group">
+                        <a id="btnCurrentDateLabel" disabled="disabled" class="btn btn-default" role="button">{{showDate}}</a>
+                    </div>
+                    <div class="btn-group">
+                        <a id="btnDateFuture" class="btn btn-default" role="button">Später</a>
                     </div>
                 </div>
             </div>
         </div>
-    {{/each}}
-</div>
-
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>{{groupObject.name}}</h3>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <input id="proposalDescription" {{disabledOnOtherGroups}} type="text" placeholder="neuer Vorschlag">
+            </div>
+            <div class="span4">
+                <input id="proposalTime" {{disabledOnOtherGroups}} type="text" placeholder="hh:mm">
+            </div>
+            <div class="span4">
+                <button id="create_proposal" {{disabledOnOtherGroups}} class="btn btn-primary" type="button">Hinzufügen</button>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class ="span12">
+                <h4>Vorschläge</h4>
+            </div>
+        </div>
+        {{#each proposals}}
+            <div class="row-fluid proposalDroppable well well-small" id="proposal_{{_id}}">
+                <div class="span6">
+                    <button {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn btn-info proposalbutton" id="{{_id}}" type="button">
+                        <span class="badge">{{creatorName}}</span>
+                        &nbsp;{{description}}
+                        <span class="badge">{{time}}</span>
+                    </button>
+                </div>
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            {{> admitterList}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>Keine Gruppe gewählt!!</h3>
+            </div>
+        </div>
+    {{/if}}
+    </div>
 </template>
 
 
 <template name="admitterList">
     {{#each admittersOfProposal this._id}}
-    <span class="badge">{{admitterName}}</span>
+    <div class="badge user {{renderDraggable this._id}}" id="{{this._id}}">{{admitterName}}</div>
     {{/each}}
 </template>
