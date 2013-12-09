@@ -45,10 +45,6 @@ Template.groupDetail.helpers({
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId);
 
-    },
-    userNameByUserId: function(creatorUserId)
-    {
-        return Meteor.call('userNameByUserId', creatorUserId);
     }
 });
 
@@ -60,6 +56,7 @@ Template.groupDetail.events(
                 description: $("#proposalDescription").val(),
                 time: $("#proposalTime").val(),
                 creator: Meteor.userId(),
+                creatorName: Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
                 groupId: Session.get('selectedGroup')
             };
 

@@ -57,8 +57,6 @@ Meteor.methods({
         console.log(Meteor.users.findOne(creatorUserId).emails[0].address.split("@")[0]);
         return Meteor.users.findOne(creatorUserId).emails[0].address.split("@")[0];
     }
-
-
 });
 
 Admitters.allow({
