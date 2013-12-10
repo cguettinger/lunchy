@@ -5,6 +5,13 @@
 
 checkInsertAllowed = function(userId, doc){ return !! userId; }
 
+Accounts.validateNewUser(function (user) {
+    var loginName = user.emails[0].address;
+    if (loginName && loginName.length >= 3 && loginName.indexOf('sybit.de') >= 0)
+        return true;
+    throw new Meteor.Error(403, "Only for privileged users!");
+});
+
 Meteor.publish('messages', function(limit) {
     return Messages.find({}, {limit: limit});
 });
