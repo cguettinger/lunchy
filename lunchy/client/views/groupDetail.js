@@ -45,12 +45,15 @@ Template.groupDetail.helpers({
         return Groups.findOne(groupId) != null;
     }
 //    topProposal: function() {
-//        var proposals = Template.groupDetail.helpers.proposals();
+//        var selectedGroupId = Session.get('selectedGroup');
+//        var dateFromSession = Session.get('currentDate');
+//        var proposals = Proposals.find({'groupId' : selectedGroupId, 'creationDate': dateFromSession}).fetch();
 //        myProposals = [];
-//        _.forEach(propasals, function(propasal, i, propasals) {
-//            myProposals.push(Admitters.find({'proposalId': proposalId}).count());
-//            console.log(myProposals);
-//        });
+//        for (var i=0;i<proposals.length;i++) {
+//            myProposals.push(Admitters.find({'proposalId': proposals[i].description}).count());
+//        }
+//
+//        return myProposals;
 //    }
 });
 
@@ -141,7 +144,7 @@ Template.groupDetail.events(
     }
 );
 
-Template.groupDetail.rendered = function () {
+Template.admitterList.rendered = function () {
     $( ".draggable" ).draggable();
     $(".proposalDroppable").droppable({
         activeClass: "activeColor",
