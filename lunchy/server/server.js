@@ -3,25 +3,6 @@
  */
 
 
-if (Groups.find().count() === 0) {
-    var groupBr = Groups.insert({
-        name: "BR"
-    });
-
-    var groupMedia = Groups.insert({
-        name: "Media"
-    });
-
-    var groupEcom = Groups.insert({
-        name: "E-Commerce"
-    });
-
-    var group3oben = Groups.insert({
-        name: "3-oben"
-    });
-
-
-}
 checkInsertAllowed = function(userId, doc){ return !! userId; }
 
 Meteor.publish('messages', function(limit) {
