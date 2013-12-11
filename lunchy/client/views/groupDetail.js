@@ -144,6 +144,17 @@ Template.groupDetail.events(
     }
 );
 
+Template.groupDetail.rendered = function () {
+
+    $( "#proposalDescription" ).autocomplete({
+        source: availableProposalLocations
+    });
+
+    $( "#proposalTime" ).autocomplete({
+        source: availableProposalTimes
+    });
+};
+
 Template.admitterList.rendered = function () {
     $( ".draggable" ).draggable();
     $(".proposalDroppable").droppable({
