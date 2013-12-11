@@ -60,6 +60,7 @@ Messages.allow({
 Meteor.publish("proposals", function () {
     return Proposals.find();
 });
+
 Meteor.publish("admitters", function () {
     return Admitters.find();
 });
