@@ -158,12 +158,9 @@ Template.groupDetail.rendered = function () {
         }
     }
     var bodyClass = topProposal.toLowerCase();
-    bodyClass = bodyClass.replace("/ /g", "");
-    // todo@cba geht aus irgendwelchen Gründen nicht
-
-    bodyClass = bodyClass.replace("/ä/g", "a").bodyClass.replace("/ö/g", "o").bodyClass.replace("/ü/g", "u");
-    // todo@cba geht aus irgendwelchen Gründen nicht
-    $("body").addClass(bodyClass);
+    bodyClass = bodyClass.replace(/ /g, '');
+    bodyClass = bodyClass.replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u');
+    $("body").attr('class', bodyClass);
 };
 
 Template.admitterList.rendered = function () {

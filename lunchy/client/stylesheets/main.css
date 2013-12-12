@@ -3,9 +3,12 @@ body{
     background-size:cover;
 }
 
-body.bufee {
-    background-image: url("/images/bufee.png"); !important;
-    background-size:cover;
+body.bufee, body.buffee, body.buffe {
+    background-image: url("/images/bufee.jpg") !important;
+}
+
+body.goldenesdreieck, body.chinese {
+    background-image: url("/images/goldenes_dreieck.jpg") !important;
 }
 
 
