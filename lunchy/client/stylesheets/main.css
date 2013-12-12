@@ -3,6 +3,12 @@ body{
     background-size:cover;
 }
 
+body.bufee {
+    background-image: url("/images/bufee.png"); !important;
+    background-size:cover;
+}
+
+
 .well {
     margin-bottom: 0;
 }

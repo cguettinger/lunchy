@@ -44,17 +44,6 @@ Template.groupDetail.helpers({
         var groupId = Session.get('selectedGroup');
         return Groups.findOne(groupId) != null;
     }
-//    topProposal: function() {
-//        var selectedGroupId = Session.get('selectedGroup');
-//        var dateFromSession = Session.get('currentDate');
-//        var proposals = Proposals.find({'groupId' : selectedGroupId, 'creationDate': dateFromSession}).fetch();
-//        myProposals = [];
-//        for (var i=0;i<proposals.length;i++) {
-//            myProposals.push(Admitters.find({'proposalId': proposals[i].description}).count());
-//        }
-//
-//        return myProposals;
-//    }
 });
 
 Template.admitterList.helpers({
@@ -153,6 +142,28 @@ Template.groupDetail.rendered = function () {
     $( "#proposalTime" ).autocomplete({
         source: availableProposalTimes
     });
+
+    console.log("in groupDetail");
+    // set the background image to the top propasal
+    var selectedGroupId = Session.get('selectedGroup');
+    var dateFromSession = Session.get('currentDate');
+    var proposals = Proposals.find({'groupId': selectedGroupId, 'creationDate': dateFromSession}).fetch();
+    var topProposal = "";
+    var topProposalCount = 0;
+    for (var i = 0; i < proposals.length; i++) {
+        var currentProposalCount = Admitters.find({'proposalId': proposals[i]._id}).count();
+        if (currentProposalCount > topProposalCount) {
+            topProposalCount = currentProposalCount;
+            topProposal = proposals[i].description;
+        }
+    }
+    var bodyClass = topProposal.toLowerCase();
+    bodyClass = bodyClass.replace("/ /g", "");
+    // todo@cba geht aus irgendwelchen Gründen nicht
+
+    bodyClass = bodyClass.replace("/ä/g", "a").bodyClass.replace("/ö/g", "o").bodyClass.replace("/ü/g", "u");
+    // todo@cba geht aus irgendwelchen Gründen nicht
+    $("body").addClass(bodyClass);
 };
 
 Template.admitterList.rendered = function () {
