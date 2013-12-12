@@ -15,8 +15,16 @@ body.kantine, body.kantineallweiler, body.allweiler, body.allweilerkantine {
     background-image: url("/images/kantine.jpg") !important;
 }
 
-body.backer, body.koch, body.backerkoch, body.kutmuhle  {
+body.kutmuhle  {
     background-image: url("/images/backer.jpg") !important;
+}
+
+body.backer, body.koch, body.backerkoch  {
+    background-image: url("/images/koch.jpg") !important;
+}
+
+body.ilpostino, body.postino  {
+    background-image: url("/images/ilpostino.jpg") !important;
 }
 
 .well {
