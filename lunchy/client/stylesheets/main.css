@@ -8,7 +8,7 @@ body.bufee, body.buffee, body.buffe {
 }
 
 body.goldenesdreieck, body.goldendreieck, body.chinese {
-    background-image: url("/images/goldenes_dreieck.jpg") !important;
+    background-image: url("/images/goldenesdreieck.jpg") !important;
 }
 
 body.kantine, body.kantineallweiler, body.allweiler, body.allweilerkantine {
@@ -25,6 +25,14 @@ body.backer, body.koch, body.backerkoch  {
 
 body.ilpostino, body.postino  {
     background-image: url("/images/ilpostino.jpg") !important;
+}
+
+body.bufeechinese, body.buffechinese, body.buffeechinese  {
+    background-image: url("/images/bufee-chinese.jpg") !important;
+}
+
+body.vulcano, body.vulkano  {
+    background-image: url("/images/vulcano.jpg") !important;
 }
 
 .well {
