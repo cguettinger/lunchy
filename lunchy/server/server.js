@@ -13,7 +13,7 @@ Accounts.validateNewUser(function (user) {
 });
 
 Meteor.publish('messages', function(limit) {
-    return Messages.find({}, {limit: limit});
+    return Messages.find({}, {limit: limit, sort: {timestamp: -1}});
 });
 
 Meteor.publish("groups", function () {

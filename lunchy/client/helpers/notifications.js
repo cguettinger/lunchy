@@ -3,7 +3,7 @@ init_document_for_notifications = function () {
     var Notification = window.Notification || window.mozNotification || window.webkitNotification;
 
     Notification.requestPermission(function (permission) {
-        console.log(permission);
+        console.log('Permission: ' + permission);
     });
 }
 
