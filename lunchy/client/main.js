@@ -25,6 +25,7 @@ Template.lunchyContentArea.rendered= function (){
 };
 
 Proposals.find().observeChanges({
+    _suppress_initial: true,
     added: function (id, proposal) {
         console.log('show');
         if(proposal.creator != Meteor.userId()){
