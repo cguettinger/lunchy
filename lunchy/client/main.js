@@ -23,13 +23,16 @@ Template.lunchyContentArea.helpers
 Template.lunchyContentArea.rendered= function (){
 
 };
-
-Proposals.find().observeChanges({
-    _suppress_initial: true,
-    added: function (id, proposal) {
-        console.log('show');
-        if(proposal.creator != Meteor.userId()){
-            showNotification('Neuer Vorschlag in Lunchy von: ' + proposal.creatorName, proposal.description);
-        }
+Deps.autorun(function () {
+    if (isProposalCollectionReady()) {
+        Proposals.find().observeChanges({
+            _suppress_initial: true,
+            added: function (id, proposal) {
+                console.log('show: ' + proposal);
+                if(isProposalCollectionReady() && proposal.creator != Meteor.userId()){
+                    showNotification('Neuer Vorschlag in Lunchy von: ' + proposal.creatorName, proposal.description);
+                }
+            }
+        });
     }
 });

@@ -1,5 +1,11 @@
-Meteor.subscribe('proposals');
+var proposalHandle = Meteor.subscribe('proposals');
 Meteor.subscribe('admitters');
+
+isProposalCollectionReady = function(){
+    return proposalHandle.ready();
+}
+
+
 
 Template.groupDetail.helpers({
     disabledOnOtherGroups: function(){
