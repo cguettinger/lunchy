@@ -35,6 +35,10 @@ body.vulcano, body.vulkano  {
     background-image: url("/images/vulcano.jpg") !important;
 }
 
+body.bierchentrinkeninradolfzell, body.bierchen, body.bier, body.saufen, body.feierabendbier  {
+    background-image: url("/images/bier.jpg") !important;
+}
+
 .well {
     margin-bottom: 0;
 }
