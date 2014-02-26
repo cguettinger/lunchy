@@ -4,7 +4,6 @@ Meteor.startup(function () {
     init_document_for_notifications();
     moment.lang('de');
     Session.set('currentDate',currentDateWithoutTime());
-
     bootbox.animate(false);
     Toast.defaults.width = '400px';
     Toast.defaults.displayDuration = 6000;
@@ -13,16 +12,10 @@ Meteor.startup(function () {
 Template.lunchyContentArea.helpers
 ({
     isLoggedIn:function(){
-
         return Meteor.userId() !== null;
-
     }
-
 });
 
-Template.lunchyContentArea.rendered= function (){
-
-};
 Deps.autorun(function () {
     if (isProposalCollectionReady()) {
         Proposals.find().observeChanges({

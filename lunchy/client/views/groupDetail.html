@@ -39,12 +39,13 @@
 
         <div class="row-fluid newProposalForm">
             <div class="span12">
-                <!-- TODO: schöner machen und auf responsive achten -->
-                <input id="proposalTime" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="hh:mm">
-                <input id="proposalDescription" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="neuer Vorschlag">
-                <button id="create_proposal" {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn push-left btn-primary" type="button">Hinzufügen</button>
+                <form id="addProposal" class="form-horizontal">
+                        <input id="proposalTime" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="hh:mm">
+                        <input id="proposalDescription" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="neuer Vorschlag">
+                        <button id="create_proposal" {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn push-left btn-primary" type="submit">Hinzufügen</button>
+                        <!-- Achtung das submit event fuer die Elemente des forms wird nur ausgeloest, wenn der button type submit hat-->
+                </form>
             </div>
-
         </div>
 
     {{else}}

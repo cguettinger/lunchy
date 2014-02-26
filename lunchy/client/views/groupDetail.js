@@ -74,22 +74,28 @@ Template.admitterList.helpers({
     }
 });
 
+submitProposal = function(evt){
+    console.log("add_proposal");
+    evt.preventDefault();
+    var dateFromSession = Session.get('currentDate');
+    var insert = {
+        description: $("#proposalDescription").val(),
+        time: $("#proposalTime").val(),
+        creationDate: dateFromSession,
+        creator: Meteor.userId(),
+        creatorName: Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
+        groupId: Session.get('selectedGroup')
+    };
+
+    Proposals.insert(insert);
+    $('#proposalDescription').val("");
+    $('#proposalTime').val("");
+}
+
 Template.groupDetail.events(
     {
-        //TODO: checken ob date in der Vergangenheit liegt.
-        'click #create_proposal': function (evt) {
-            evt.preventDefault();
-            var dateFromSession = Session.get('currentDate');
-            var insert = {
-                description: $("#proposalDescription").val(),
-                time: $("#proposalTime").val(),
-                creationDate: dateFromSession,
-                creator: Meteor.userId(),
-                creatorName: Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
-                groupId: Session.get('selectedGroup')
-            };
-
-            Proposals.insert(insert);
+        'submit #addProposal': function (evt) {
+            submitProposal(evt);
         },
         'click .proposalbutton': function (evt) {
 
