@@ -7,6 +7,10 @@ body.bufee, body.buffee, body.buffe {
     background-image: url("/images/bufee_.jpg") !important;
 }
 
+body.porterhouse {
+    background-image: url("/images/porterhouse.jpg") !important;
+}
+
 body.goldenesdreieck, body.goldendreieck, body.chinese {
     background-image: url("/images/goldenesdreieck.jpg") !important;
 }

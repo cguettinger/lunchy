@@ -21,7 +21,8 @@ availableProposalLocations = [
     "Zum Zinnkrug",
     "Zinnkrug",
     "Duca",
-    "Metzgerei Frick"
+    "Metzgerei Frick",
+	"Porter House"
 ];
 
 availableProposalTimes = [
