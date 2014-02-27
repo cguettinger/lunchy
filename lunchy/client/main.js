@@ -7,6 +7,7 @@ Meteor.startup(function () {
     bootbox.animate(false);
     Toast.defaults.width = '400px';
     Toast.defaults.displayDuration = 6000;
+
 });
 
 Template.lunchyContentArea.helpers
@@ -29,3 +30,8 @@ Deps.autorun(function () {
         });
     }
 });
+
+
+Template.lunchyContentArea.rendered = function () {
+    $('.withTooltip').tooltip();
+}

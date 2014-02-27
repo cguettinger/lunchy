@@ -1,6 +1,8 @@
 var proposalHandle = Meteor.subscribe('proposals');
 Meteor.subscribe('admitters');
 
+var reminder;
+
 isProposalCollectionReady = function(){
     return proposalHandle.ready();
 }
@@ -74,22 +76,45 @@ Template.admitterList.helpers({
     }
 });
 
+checkTimeOfProposalReachedAndNotify = function (){
+    time = Session.get("proposalTime").split(":");
+    description = Session.get("proposalDescription");
+    console.log("timer: " + time[0] + ":" + time[1]);
+    dayString = formattedDate(new Date());
+    dateTimeOfProposal = dateFromString(dayString);
+    dateTimeOfProposal.setMinutes(time[1]);
+    dateTimeOfProposal.setHours(time[0]);
+    now = new Date();
+    if(now.getTime() + 5*60*1000 > dateTimeOfProposal.getTime() && now.getTime() <= dateTimeOfProposal.getTime()){
+        showNotification("Es geht gleich los!", "Um " + time[0] + ":" + time[1] + " Uhr geht's los. Ziel: " + description);
+        Meteor.clearInterval(reminder);
+        reminder = null;
+    }
+    if(reminder && now.getTime() > dateTimeOfProposal.getTime()){
+        Meteor.clearInterval(reminder);
+        reminder = null;
+    }
+    console.log("date: " + dateTimeOfProposal);
+};
+
 submitProposal = function(evt){
     console.log("add_proposal");
     evt.preventDefault();
-    var dateFromSession = Session.get('currentDate');
-    var insert = {
-        description: $("#proposalDescription").val(),
-        time: $("#proposalTime").val(),
-        creationDate: dateFromSession,
-        creator: Meteor.userId(),
-        creatorName: Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
-        groupId: Session.get('selectedGroup')
-    };
+    if($("#proposalDescription").val() && $("#proposalTime").val()){
+        var dateFromSession = Session.get('currentDate');
+        var insert = {
+            description: $("#proposalDescription").val(),
+            time: $("#proposalTime").val(),
+            creationDate: dateFromSession,
+            creator: Meteor.userId(),
+            creatorName: Meteor.users.findOne(Meteor.userId()).emails[0].address.split("@")[0],
+            groupId: Session.get('selectedGroup')
+        };
 
-    Proposals.insert(insert);
-    $('#proposalDescription').val("");
-    $('#proposalTime').val("");
+        Proposals.insert(insert);
+        $('#proposalDescription').val("");
+        $('#proposalTime').val("");
+    }
 }
 
 Template.groupDetail.events(
@@ -100,17 +125,26 @@ Template.groupDetail.events(
         'click .proposalbutton': function (evt) {
 
             var proposalId = $(evt.currentTarget).attr("id");
+            var proposal = Proposals.findOne(proposalId);
+            var proposalTime = proposal.time;
+            var proposalDescription = proposal.description;
+            Session.set("proposalTime", proposalTime);
+            Session.set("proposalDescription", proposalDescription);
             var currentDate = Session.get('currentDate');
 
 
             var result = Admitters.findOne(Meteor.userId()+currentDate);
 
-
+            if(reminder){
+                Meteor.clearInterval(reminder);
+                reminder = null;
+            }
             if(result && result.proposalId == proposalId) {
                 Admitters.remove(Meteor.userId()+currentDate);
             }
             else if(result) {
                 Admitters.update(Meteor.userId() + currentDate, {$set: {proposalId:proposalId}});
+                reminder = Meteor.setInterval(checkTimeOfProposalReachedAndNotify, 5000);
             } else {
                 var insert = {
                     _id: Meteor.userId() + currentDate,
@@ -119,6 +153,7 @@ Template.groupDetail.events(
                     proposalId:proposalId
                 };
                 var id = Admitters.insert(insert);
+                reminder = Meteor.setInterval(checkTimeOfProposalReachedAndNotify, 5000);
             }
         },
         'click #btnDatePast': function (evt) {
@@ -148,11 +183,13 @@ Template.groupDetail.events(
 Template.groupDetail.rendered = function () {
 
     $( "#proposalDescription" ).autocomplete({
-        source: availableProposalLocations
+        source: availableProposalLocations,
+        minLength: 0
     });
 
     $( "#proposalTime" ).autocomplete({
-        source: availableProposalTimes
+        source: availableProposalTimes,
+        minLength: 0
     });
 
     console.log("in groupDetail");
@@ -173,6 +210,18 @@ Template.groupDetail.rendered = function () {
     bodyClass = bodyClass.replace(/ /g, '');
     bodyClass = bodyClass.replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u');
     $("body").attr('class', bodyClass);
+
+    if(reminder){
+        Meteor.clearInterval(reminder);
+        reminder = null;
+    }
+    var proposalId = $(evt.currentTarget).attr("id");
+    var proposal = Proposals.findOne(proposalId);
+    var proposalTime = proposal.time;
+    var proposalDescription = proposal.description;
+    Session.set("proposalTime", proposalTime);
+    Session.set("proposalDescription", proposalDescription);
+    reminder = Meteor.setInterval(checkTimeOfProposalReachedAndNotify, 5000);
 };
 
 Template.admitterList.rendered = function () {

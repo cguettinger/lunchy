@@ -40,10 +40,12 @@ Deps.autorun(function(){
 Template.groupList.events({
     'submit #create_group': function (evt) {
         evt.preventDefault();
-        Groups.insert({name: $(evt.target).find("input").val()});
+        if($(evt.target).find("input").val().trim()){
+            Groups.insert({name: $(evt.target).find("input").val()});
+        }
         $(evt.target).find("input").val("");
 
-        console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
+        //console.log("userId " + Meteor.userId() + " groups: " + UsersToGroups.find().count());
 
     },
 
@@ -72,3 +74,4 @@ Template.groupList.events({
        Session.set('selectedGroup', $(evt.target).attr("href"));
     }
 });
+

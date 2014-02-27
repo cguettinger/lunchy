@@ -6,8 +6,8 @@
         <ul>
             {{#each myGroups}}
                 <li>
-                    <a href="{{_id}}" class="groupIconMinus"><i class="icon-minus-sign"></i></a>
-                    <a href="{{_id}}" class="groupItem">{{name}}</a>
+                    <a href="{{_id}}" class="groupIconMinus withTooltip" title="Gruppe von Meine Gruppen entfernen"><i class="icon-minus-sign"></i></a>
+                    <a href="{{_id}}" class="groupItem withTooltip" title="Gruppe anzeigen">{{name}}</a>
                 </li>
             {{/each}}
         </ul>
@@ -20,8 +20,8 @@
         <ul>
             {{#each allGroups}}
                 <li>
-                    <a href="{{_id}}" class="groupIconPlus"><i class="icon-plus-sign"></i></a>
-                    <a href="{{_id}}" class="groupItem">{{name}}</a>
+                    <a href="{{_id}}" class="groupIconPlus withTooltip" title="Gruppe zu Meine Gruppen hinzufügen"><i class="icon-plus-sign"></i></a>
+                    <a href="{{_id}}" class="groupItem withTooltip" title="Gruppe anzeigen">{{name}}</a>
                 </li>
             {{/each}}
         </ul>

@@ -76,6 +76,10 @@ body.bierchentrinkeninradolfzell, body.bierchen, body.bier, body.saufen, body.fe
 
 }
 
+#proposalTime{
+    width:4em;
+}
+
 .creatorBadge
 {
     margin-top:7px;

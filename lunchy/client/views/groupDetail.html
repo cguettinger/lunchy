@@ -5,13 +5,13 @@
             <div class="span12">
                 <div class="btn-toolbar" role="toolbar">
                     <div class="btn-group">
-                        <a id="btnDatePast" class="btn btn-default" role="button">Früher</a>
+                        <a id="btnDatePast" class="btn btn-default withTooltip" title="Zu früheren Tagen gehen" role="button">Früher</a>
                     </div>
                     <div class="btn-group">
                         <a id="btnCurrentDateLabel" disabled="disabled" class="btn btn-default" role="button">{{showDate}}</a>
                     </div>
                     <div class="btn-group">
-                        <a id="btnDateFuture" class="btn btn-default" role="button">Später</a>
+                        <a id="btnDateFuture" class="btn btn-default withTooltip" title="Zu späteren Tagen gehen" role="button">Später</a>
                     </div>
                 </div>
             </div>
@@ -38,14 +38,20 @@
         {{/each}}
 
         <div class="row-fluid newProposalForm">
-            <div class="span12">
+
                 <form id="addProposal" class="form-horizontal">
-                        <input id="proposalTime" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="hh:mm">
-                        <input id="proposalDescription" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="neuer Vorschlag">
-                        <button id="create_proposal" {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn push-left btn-primary" type="submit">Hinzufügen</button>
-                        <!-- Achtung das submit event fuer die Elemente des forms wird nur ausgeloest, wenn der button type submit hat-->
+                        <div class="span1">
+                            <input id="proposalTime" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="hh:mm">
+                        </div>
+                        <div class="span2">
+                            <input id="proposalDescription" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="neuer Vorschlag">
+                        </div>
+                        <div class="span9">
+                            <button id="create_proposal" {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn push-left btn-primary withTooltip" title="Vorschlag hinzufügen" type="submit">Hinzufügen</button>
+                        </div>
+                            <!-- Achtung das submit event fuer die Elemente des forms wird nur ausgeloest, wenn der button type submit hat-->
                 </form>
-            </div>
+
         </div>
 
     {{else}}
