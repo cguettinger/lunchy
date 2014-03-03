@@ -215,13 +215,19 @@ Template.groupDetail.rendered = function () {
         Meteor.clearInterval(reminder);
         reminder = null;
     }
-    var proposalId = $(evt.currentTarget).attr("id");
-    var proposal = Proposals.findOne(proposalId);
-    var proposalTime = proposal.time;
-    var proposalDescription = proposal.description;
-    Session.set("proposalTime", proposalTime);
-    Session.set("proposalDescription", proposalDescription);
-    reminder = Meteor.setInterval(checkTimeOfProposalReachedAndNotify, 5000);
+    var currentDateTimestamp = dateFromString(currentDateString).getTime();
+    var currentDate = formattedDate(currentDateTimestamp);
+    var admitter = Admitters.findOne(Meteor.userId()+currentDate);
+    if(admitter){
+        var proposalId = admitter.proposalId;
+        var proposal = Proposals.findOne(proposalId);
+        var proposalTime = proposal.time;
+        var proposalDescription = proposal.description;
+        Session.set("proposalTime", proposalTime);
+        Session.set("proposalDescription", proposalDescription);
+        reminder = Meteor.setInterval(checkTimeOfProposalReachedAndNotify, 5000);
+    }
+
 };
 
 Template.admitterList.rendered = function () {
