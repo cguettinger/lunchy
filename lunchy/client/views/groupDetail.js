@@ -215,9 +215,9 @@ Template.groupDetail.rendered = function () {
         Meteor.clearInterval(reminder);
         reminder = null;
     }
-    var currentDateTimestamp = dateFromString(currentDateString).getTime();
-    var currentDate = formattedDate(currentDateTimestamp);
-    var admitter = Admitters.findOne(Meteor.userId()+currentDate);
+    var now = new Date();
+    var currentDateString = formattedDate(now);
+    var admitter = Admitters.findOne(Meteor.userId()+currentDateString);
     if(admitter){
         var proposalId = admitter.proposalId;
         var proposal = Proposals.findOne(proposalId);
