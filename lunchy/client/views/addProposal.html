@@ -1,0 +1,17 @@
+<template name="addProposal">
+    <form id="addProposal" class="form-horizontal">
+        <div class="span1">
+            <!-- mit Blaze darf man keine ganzen Attribute mehr zurückgeben, sondern nur noch Attribut Werte
+                 wenn man für einen Attributwert null oder undefined zurückgibt, dann wird das ganze Attribut entfernt
+            -->
+            <input id="proposalTime" disabled="{{disabledOnOtherGroupsOrPastProposals}}" type="text" placeholder="hh:mm">
+        </div>
+        <div class="span2">
+            <input id="proposalDescription" disabled="{{disabledOnOtherGroupsOrPastProposals}}" type="text" placeholder="neuer Vorschlag">
+        </div>
+        <div class="span9">
+            <button id="create_proposal" disabled="{{disabledOnOtherGroupsOrPastProposals}}" class="btn push-left btn-primary withTooltip" title="Vorschlag hinzufügen" type="submit">Hinzufügen</button>
+        </div>
+        <!-- Achtung das submit event fuer die Elemente des forms wird nur ausgeloest, wenn der button type submit hat-->
+    </form>
+</template>

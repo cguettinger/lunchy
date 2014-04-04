@@ -10,24 +10,6 @@ isProposalCollectionReady = function(){
 
 
 Template.groupDetail.helpers({
-    disabledOnOtherGroups: function(){
-        var selectedGroupId = Session.get('selectedGroup');
-        if(UsersToGroups.find({userId: Meteor.userId(), group: selectedGroupId}).count() == 0){
-            return "disabled='disabled'";
-        }else{
-            return "";
-        }
-    },
-    disabledForPastProposals:function(){
-        var currentDateString = Session.get('currentDate');
-        var currentDate = dateFromString(currentDateString);
-        console.log('currentDateParsed:', currentDate);
-        if(currentDate.getTime() < dateFromString(currentDateWithoutTime()).getTime()){
-            return "disabled='disabled'";
-        }else{
-            return "";
-        }
-    },
     proposals: function(){
         var selectedGroupId = Session.get('selectedGroup');
         var dateFromSession = Session.get('currentDate');
@@ -76,26 +58,7 @@ Template.admitterList.helpers({
     }
 });
 
-checkTimeOfProposalReachedAndNotify = function (){
-    time = Session.get("proposalTime").split(":");
-    description = Session.get("proposalDescription");
-    console.log("timer: " + time[0] + ":" + time[1]);
-    dayString = formattedDate(new Date());
-    dateTimeOfProposal = dateFromString(dayString);
-    dateTimeOfProposal.setMinutes(time[1]);
-    dateTimeOfProposal.setHours(time[0]);
-    now = new Date();
-    if(now.getTime() + 5*60*1000 > dateTimeOfProposal.getTime() && now.getTime() <= dateTimeOfProposal.getTime()){
-        showNotification("Es geht gleich los!", "Um " + time[0] + ":" + time[1] + " Uhr geht's los. Ziel: " + description);
-        Meteor.clearInterval(reminder);
-        reminder = null;
-    }
-    if(reminder && now.getTime() > dateTimeOfProposal.getTime()){
-        Meteor.clearInterval(reminder);
-        reminder = null;
-    }
-    console.log("date: " + dateTimeOfProposal);
-};
+
 
 submitProposal = function(evt){
     console.log("add_proposal");
@@ -180,37 +143,32 @@ Template.groupDetail.events(
     }
 );
 
-Template.groupDetail.rendered = function () {
-
-    $( "#proposalDescription" ).autocomplete({
-        source: availableProposalLocations,
-        minLength: 0
-    });
-
-    $( "#proposalTime" ).autocomplete({
-        source: availableProposalTimes,
-        minLength: 0
-    });
-
-    console.log("in groupDetail");
-    // set the background image to the top propasal
-    var selectedGroupId = Session.get('selectedGroup');
-    var dateFromSession = Session.get('currentDate');
-    var proposals = Proposals.find({'groupId': selectedGroupId, 'creationDate': dateFromSession}).fetch();
-    var topProposal = "";
-    var topProposalCount = 0;
-    for (var i = 0; i < proposals.length; i++) {
-        var currentProposalCount = Admitters.find({'proposalId': proposals[i]._id}).count();
-        if (currentProposalCount > topProposalCount) {
-            topProposalCount = currentProposalCount;
-            topProposal = proposals[i].description;
-        }
+checkTimeOfProposalReachedAndNotify = function (){
+    time = Session.get("proposalTime").split(":");
+    description = Session.get("proposalDescription");
+    console.log("timer: " + time[0] + ":" + time[1]);
+    dayString = formattedDate(new Date());
+    dateTimeOfProposal = dateFromString(dayString);
+    dateTimeOfProposal.setMinutes(time[1]);
+    dateTimeOfProposal.setHours(time[0]);
+    now = new Date();
+    if(now.getTime() + 5*60*1000 > dateTimeOfProposal.getTime() && now.getTime() <= dateTimeOfProposal.getTime()){
+        showNotification("Es geht gleich los!", "Um " + time[0] + ":" + time[1] + " Uhr geht's los. Ziel: " + description);
+        Meteor.clearInterval(reminder);
+        reminder = null;
     }
-    var bodyClass = topProposal.toLowerCase();
-    bodyClass = bodyClass.replace(/ /g, '');
-    bodyClass = bodyClass.replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u');
-    $("body").attr('class', bodyClass);
+    if(reminder && now.getTime() > dateTimeOfProposal.getTime()){
+        Meteor.clearInterval(reminder);
+        reminder = null;
+    }
+    console.log("date: " + dateTimeOfProposal);
+};
 
+Template.groupDetail.rendered = function () {
+    // Dieser Code gehört tatsächlich in den rendered Abschnitt
+    // der nur ein einziges mal bei rendern des Templates
+    // ausgeführt wird, da beim ändern der Zustimmung zum Vorschlag
+    // wieder ein Timer aufgezogen wird
     if(reminder){
         Meteor.clearInterval(reminder);
         reminder = null;
@@ -225,9 +183,9 @@ Template.groupDetail.rendered = function () {
         var proposalDescription = proposal.description;
         Session.set("proposalTime", proposalTime);
         Session.set("proposalDescription", proposalDescription);
+        Toast.info("Setting interval for: " + proposalDescription);
         reminder = Meteor.setInterval(checkTimeOfProposalReachedAndNotify, 5000);
     }
-
 };
 
 Template.admitterList.rendered = function () {

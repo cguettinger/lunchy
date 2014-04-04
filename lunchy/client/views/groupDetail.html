@@ -24,7 +24,7 @@
         {{#each proposals}}
             <div class="row-fluid proposalDroppable" id="proposal_{{_id}}">
                 <div class="span12">
-                    <button class="btn btn-large proposalbutton" id="{{_id}}" type="button" {{disabledOnOtherGroups}} {{disabledForPastProposals}} >
+                    <button class="btn btn-large proposalbutton" id="{{_id}}" type="button" disabled="{{disabledOnOtherGroupsOrPastProposals}}">
                     <span class="badge creatorBadge pull-left">{{creatorName}}</span>
                     <span class="pull-left">{{time}}</span>
                     <span class="pull-left">&nbsp;{{description}}</span>
@@ -38,20 +38,7 @@
         {{/each}}
 
         <div class="row-fluid newProposalForm">
-
-                <form id="addProposal" class="form-horizontal">
-                        <div class="span1">
-                            <input id="proposalTime" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="hh:mm">
-                        </div>
-                        <div class="span2">
-                            <input id="proposalDescription" {{disabledOnOtherGroups}} {{disabledForPastProposals}} type="text" placeholder="neuer Vorschlag">
-                        </div>
-                        <div class="span9">
-                            <button id="create_proposal" {{disabledOnOtherGroups}} {{disabledForPastProposals}} class="btn push-left btn-primary withTooltip" title="Vorschlag hinzufügen" type="submit">Hinzufügen</button>
-                        </div>
-                            <!-- Achtung das submit event fuer die Elemente des forms wird nur ausgeloest, wenn der button type submit hat-->
-                </form>
-
+            {{> addProposal}}
         </div>
 
     {{else}}

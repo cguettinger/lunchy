@@ -3,8 +3,8 @@
     <title>Lunchy</title>
 </head>
 
-<body>
-
+<body >
+{{topProposalClass}}
     <div class="container-fluid">
 
         <div class="row-fluid">
@@ -19,24 +19,14 @@
                         <a class="brand" href="#">Lunchy</a>
                         <div class="nav-collapse collapse">
                             <ul class="nav pull-right">
-                                <li><a href="#">{{loginButtons}}</a></li>
+                                <li><a href="#">{{> loginButtons}}</a></li>
                             </ul>
                         </div><!--/.nav-collapse -->
                     </div>
                 </div>
             </div>
         </div>
-
         {{> lunchyContentArea}}
-
-        <!--<div class="row-fluid">
-            <div class="span12 navbar navbar-fixed-bottom" id="lunchy-footer">
-                <div class="navbar-inner">
-                    Footer
-                </div>
-            </div>
-
-        </div>-->
     </div>
 
 </body>
@@ -50,9 +40,7 @@
             </div>
         </div>
         <div class="span9" id="lunchy-content">
-
             {{> groupDetail}}
-
             <div class="hero-unit">
                     {{> messages}}
             </div>

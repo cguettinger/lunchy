@@ -1,41 +1,16 @@
 var dep = new Deps.Dependency;
-var popped = false;
-
-function onclick (e) {
-  var el = e.currentTarget;
-  var which = _.isUndefined(e.which) ? e.button : e.which;
-  var href = el.href;
-  var path = el.pathname + el.search + el.hash;
-
-  // we only want to handle clicks on links which:
-  //  - are with the left mouse button with no meta key pressed
-  if (which !== 1)
-    return;
-
-  if (e.metaKey || e.ctrlKey || e.shiftKey) 
-    return;
-  
-  // - haven't been cancelled already
-  if (e.isDefaultPrevented())
-    return;
-  
-  // - aren't in a new window
-  if (el.target)
-    return;
-  
-  // - aren't external to the app
-  if (!IronLocation.isSameOrigin(href)) 
-    return;
-  
-  // note that we _do_ handle links which point to the current URL
-  // and links which only change the hash.
-  e.preventDefault();
-  IronLocation.set(path);
-}
+// XXX: we have to store the state internally (rather than just calling out
+// to window.location) due to an android 2.3 bug. See:
+//   https://github.com/EventedMind/iron-router/issues/350
+var currentState = {
+  path: location.pathname + location.search + location.hash,
+  // we set title to null because that can be triggered immediately by a "noop"
+  // popstate that happens on load -- if it's already null, nothing's changed.
+  title: null
+};
 
 function onpopstate (e) {
-  if (popped)
-    dep.changed();
+  setState(e.originalEvent.state, null, location.pathname + location.search + location.hash);
 }
 
 IronLocation = {};
@@ -51,12 +26,12 @@ IronLocation.isSameOrigin = function (href) {
 
 IronLocation.get = function () {
   dep.depend();
-  return location;
+  return currentState;
 };
 
 IronLocation.path = function () {
   dep.depend();
-  return location.pathname + location.search + location.hash;
+  return currentState.path;
 };
 
 IronLocation.set = function (url, options) {
@@ -77,36 +52,60 @@ IronLocation.set = function (url, options) {
   else if (options.where === 'server')
     window.location = href;
   else if (options.replaceState)
-    IronLocation.replaceState(state, options.title, url);
+    IronLocation.replaceState(state, options.title, url, options.skipReactive);
   else
-    IronLocation.pushState(state, options.title, url);
-
-  if (options.skipReactive !== true)
-    dep.changed();
+    IronLocation.pushState(state, options.title, url, options.skipReactive);
 };
 
-IronLocation.pushState = function (state, title, url) {
-  popped = true;
+// store the state for later access
+setState = function(newState, title, url, skipReactive) {
+  newState = _.extend({}, newState);
+  newState.path = url;
+  newState.title = title;
+  
+  if (!skipReactive && ! EJSON.equals(currentState, newState))
+    dep.changed();
+  
+  currentState = newState;
+}
+
+IronLocation.pushState = function (state, title, url, skipReactive) {
+  setState(state, title, url, skipReactive);
+  
   if (history.pushState)
     history.pushState(state, title, url);
   else
     window.location = url;
 };
 
-IronLocation.replaceState = function (state, title, url) {
-  popped = true;
+IronLocation.replaceState = function (state, title, url, skipReactive) {
+  // allow just the state or title to be set
+  if (arguments.length < 2)
+    title = currentState.title;
+  if (arguments.length < 3)
+    url = currentState.path;
+    
+  setState(state, title, url, skipReactive);
+  
   if (history.replaceState)
     history.replaceState(state, title, url);
   else
     window.location = url;
 };
 
+IronLocation.bindEvents = function(){
+  $(window).on('popstate.iron-router', onpopstate);
+};
+
+IronLocation.unbindEvents = function(){
+  $(window).off('popstate.iron-router');
+};
+
 IronLocation.start = function () {
   if (this.isStarted)
     return;
 
-  $(window).on('popstate', onpopstate);
-  $(document).on('click', 'a[href]', onclick);
+  IronLocation.bindEvents();
   this.isStarted = true;
   
   // store the fact that this is the first route we hit.
@@ -116,13 +115,10 @@ IronLocation.start = function () {
   //   2. Users can look at the state to tell if the history.back() will stay
   //      inside the app (this is important for mobile apps).
   if (history.replaceState)
-    history.replaceState({initial: true}, null, location.pathname + location.search)
+    history.replaceState({initial: true}, null, location.pathname + location.search + location.hash);
 };
 
 IronLocation.stop = function () {
-  $(window).off('popstate', onpopstate);
-  $(window).off('click', 'a[href]', onclick);
+  IronLocation.unbindEvents();
   this.isStarted = false;
 };
-
-IronLocation.start();

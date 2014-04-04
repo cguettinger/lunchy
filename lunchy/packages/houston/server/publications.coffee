@@ -36,6 +36,9 @@ Houston._setup_collection = (collection) ->
   Meteor.methods methods
 
   Houston._publish name, (sort, filter, limit) ->
+    check sort, Match.Optional(Object)
+    check filter, Match.Optional(Object)
+    check limit, Match.Optional(Number)
     return unless Houston._user_is_admin @userId
     try
       collection.find(filter, sort: sort, limit: limit)
@@ -72,7 +75,7 @@ sync_collections = ->
           new_collection = new Meteor.Collection(name)
         catch e
           for key, value of root
-            if name == value._name # TODO here - typecheck also?
+            if name == value?._name # TODO here - typecheck also?
               new_collection = value
 
         if new_collection?  # found it!
@@ -94,6 +97,7 @@ If you'd like to access the collection from Houston, either
 
 Meteor.methods
   _houston_make_admin: (user_id) ->
+    check user_id, String
     # limit one admin
     return if Houston._admins.findOne {'user_id': $exists: true}
     Houston._admins.insert {user_id}

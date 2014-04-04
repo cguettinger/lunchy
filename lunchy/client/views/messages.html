@@ -2,7 +2,7 @@
     {{#if hasGroup}}
 
         <form id="add_message" class="form-horizontal">
-            <input {{disabledOnOtherGroups}} class="span14 withTooltip" title="Enter oder Submit zum Abschicken" type="text" placeholder="Neue Nachricht">
+            <input disabled="{{disabledOnOtherGroupsOrPastProposals}}" class="span14 withTooltip" title="Enter oder Submit zum Abschicken" type="text" placeholder="Neue Nachricht">
         </form>
 
     {{> messagesItems}}
